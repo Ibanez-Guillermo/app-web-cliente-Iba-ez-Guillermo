@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Librería</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Logo</a>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Productos</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+      <div>
+        <a href="#">Carrito (0)</a>
+        <a href="#">Mi cuenta</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="filtros">
+      <h2>Filtros</h2>
+      <form>
+        <fieldset>
+          <legend>Categoría</legend>
+          <label><input type="checkbox"> Crecimiento personal</label>
+          <label><input type="checkbox"> Finanzas</label>
+          <label><input type="checkbox"> Habilidades</label>
+        </fieldset>
+        <fieldset>
+          <legend>Precio</legend>
+          <label>Mínimo: <input type="number" min="0"></label>
+          <label>Máximo: <input type="number" min="0"></label>
+        </fieldset>
+      </form>
+    </section>
+
+    <section class="productos">
+      <h2>Productos</h2>
+      <article>
+        <img src="img/producto1.jpg" alt="Producto 1">
+        <h3>Producto 1</h3>
+        <p>$100.00</p>
+        <button>Agregar al carrito</button>
+      </article>
+      <article>
+        <img src="img/producto2.jpg" alt="Producto 2">
+        <h3>Producto 2</h3>
+        <p>$200.00</p>
+        <button>Agregar al carrito</button>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 E-Commerce - Proyecto Universitario</p>
+  </footer>
+
+</body>
+</html>
