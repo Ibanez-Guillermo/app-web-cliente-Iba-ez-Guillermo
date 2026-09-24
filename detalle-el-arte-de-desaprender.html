@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>El arte de desaprender - Librería</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
   <header>
@@ -29,7 +31,7 @@
         <img src="https://images.cdn2.buscalibre.com/fit-in/660x660/89/45/894543157fb75caedbe2fd269c1815b6.jpg"
           alt="Tapa del libro El arte de desaprender" width="200" height="300">
       </figure>
-      
+
       <!--         Inicio del cambio        -->
       <!--         meter en un div para aplicar css después        -->
       <div class="informacion_principal">
@@ -37,28 +39,28 @@
           <h1>El arte de desaprender</h1>
           <p class="autor">Enric Corbera</p>
           <!--         Inicio del cambio      -->
-          <!--  Agregue la fecha de edición y el formato del libro como parte de la información principal y numero de paginas -->          
+          <!--  Agregue la fecha de edición y el formato del libro como parte de la información principal y numero de paginas -->
           <p class="edicion"> <span class="fecha">2017 </span> - El grano de mostaza ediciones </p>
           <p class="formato">Electrónico</p>
           <p class="paginas">320 páginas</p>
           <!--         Fin del cambio         -->
-        <!-- agregar genero literario como parte de la información principal  -->
-          <p class="genero">#Autoayuda  #Espiritualidad</p>
+          <!-- agregar genero literario como parte de la información principal  -->
+          <p class="genero">#Autoayuda #Espiritualidad</p>
           <p class="precio">$16500.00</p>
           <p class="isbn">ISBN: 978-987-4170-00-3</p>
           <p class="disponibilidad">Disponibilidad: No aplica</p>
           <p class="envio">Envío: No aplica</p>
-        </div>  
-      <!--         Inicio del cambio        -->
-      <!--         Agregue un boton de compra y de carrito        -->
+        </div>
+        <!--         Inicio del cambio        -->
+        <!--         Agregue un boton de compra y de carrito        -->
         <div class="interaccion_comprar">
           <button type="button" class="btn-comprar">Comprar</button>
           <button type="button" class="btn-carrito">Agregar al carrito</button>
         </div>
-      <!--         Fin del cambio         -->
+        <!--         Fin del cambio         -->
       </div>
       <!--         Fin del cambio         -->
-      
+
       <!--         Inicio del cambio        -->
       <!--    Movi la descripcion de debajo de las caracteristicas a encima de las caracteristicas    -->
       <section class="descripcion">
@@ -71,7 +73,7 @@
         </p>
       </section>
       <!--         Fin del cambio         -->
-      
+
       <!--         Encerré en una sección las caracteristicas y creé una clase      -->
       <section class="detalles_libro">
         <h2>Informacion Adicional</h2>
@@ -83,7 +85,7 @@
           <dt>Dimensiones</dt>
           <dd>No aplica</dd>
           <!--         Inicio del cambio        -->
-               <!--  Caracteristicas agregadas    -->
+          <!--  Caracteristicas agregadas    -->
           <dt>Idioma</dt>
           <dd>Español</dd>
           <dt>editorial</dt>
@@ -100,40 +102,18 @@
 
       <!-- encerré las calificaciones y comentarios en una sola sección separandolas por <div> -->
       <section class="calificaciones_comentarios">
-        <h2>calificaciones y opiniones</h2>
-        <!--         Inicio del cambio        -->
-        <!-- Encerrar las valoraciones en un <div> en lugar de <dl> -->
-        <div>
-          <h3>Valoraciones</h3>  <!--cambiar <dt> por <h3></h3> -->
-          <p>★★★★☆ (4.1/5 · 87 reseñas)</p> <!--cambiar <dd> por <p></p> -->
+        <h2>Calificaciones y opiniones</h2>
+
+        <div class="resumen_valoraciones">
+          <h3>Valoraciones</h3>
+          <p>Aún no hay valoraciones para este libro.</p>
         </div>
-        <!--         Fin del cambio         -->
-      
-        <div>
+
+        <div class="listado_comentarios">
           <h3>Comentarios</h3>
-
-          <article class="comentario">
-            <header>
-              <p><strong>Eugenia S.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
-            </header>
-            <p>Me ayudó a repensar muchas creencias que arrastraba. Lectura que invita a reflexionar.</p>
-          </article>
-
-          <article class="comentario">
-            <header>
-              <p><strong>Raúl F.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
-            </header>
-            <p>Interesante, aunque algunos conceptos requieren profundizar con otros textos del autor.</p>
-          </article>
-
-          <article class="comentario">
-            <header>
-              <p><strong>Belén A.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
-            </header>
-            <p>Buen libro digital, cómodo para leer en cualquier momento. Lo recomiendo.</p>
-          </article>
+          <p class="sin_comentarios">Todavía no hay comentarios. ¡Sé el primero en opinar sobre este libro!</p>
         </div>
-        <!--Voy a agregar un formulario para enviar comentarios -->
+
         <form class="form_comentario">
           <h3>Deja tu comentario</h3>
 
@@ -180,4 +160,5 @@
   </footer>
 
 </body>
+
 </html>
