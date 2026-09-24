@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Una familia moderna - Librería</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Logo</a>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#">Productos</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+      <div>
+        <a href="#">Carrito (0)</a>
+        <a href="#">Mi cuenta</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <article class="detalle-producto">
+      <figure>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXddtZRLG-zrD6l3sabHdIfbYhcgqzk2v7FCQimZCwhQ&s"
+          alt="Tapa del libro Una familia moderna" width="200" height="300">
+      </figure>
+
+      <div class="informacion_principal">
+        <div class="info_libro">
+          <h1>Una familia moderna</h1>
+          <p class="autor">Julia Navarro</p>
+          <p class="edicion"> <span class="fecha">2026 </span> - Plaza &amp; Janés </p>
+          <p class="formato">Físico</p>
+          <p class="paginas">400 páginas</p>
+          <p class="genero">#NovelaContemporánea  #Ficción</p>
+          <p class="precio">$64000.00</p>
+          <p class="isbn">ISBN: 9788401033797</p>
+          <p class="disponibilidad">Disponibilidad: No especificada</p>
+          <p class="envio">Envío: No especificado</p>
+        </div>
+        <div class="interaccion_comprar">
+          <button type="button" class="btn-comprar">Comprar</button>
+          <button type="button" class="btn-carrito">Agregar al carrito</button>
+        </div>
+      </div>
+
+      <section class="descripcion">
+        <h2>Descripción</h2>
+        <p>
+          Martha brilló en los escenarios internacionales como primera bailarina de las
+          compañías de ballet más prestigiosas; Thomas es un reconocido filósofo con una
+          intensa vida académica. A sus setenta años, ambos observan con desconcierto cómo
+          el mundo que creían conocer ha cambiado para siempre. A través de su hija
+          Felicitas, que dirige un canal digital y crió sola a Penny, una adolescente que
+          desafía todas las convenciones, Julia Navarro construye una afilada novela sobre
+          el paso del tiempo, la identidad, la comunicación entre generaciones y las
+          contradicciones de la vida contemporánea.
+        </p>
+      </section>
+
+      <section class="detalles_libro">
+        <h2>Informacion Adicional</h2>
+        <dl>
+          <dt>Formato</dt>
+          <dd>Físico</dd>
+          <dt>Edición</dt>
+          <dd>Tapa dura</dd>
+          <dt>Dimensiones</dt>
+          <dd>No especificado</dd>
+          <dt>Idioma</dt>
+          <dd>Español</dd>
+          <dt>editorial</dt>
+          <dd>Plaza &amp; Janés</dd>
+          <dt>año de publicación</dt>
+          <dd>2026</dd>
+          <dt>Numero de paginas</dt>
+          <dd>400</dd>
+          <dt>Clasificación</dt>
+          <dd>Apto para todo publico</dd>
+        </dl>
+      </section>
+
+      <section class="calificaciones_comentarios">
+        <h2>calificaciones y opiniones</h2>
+
+        <div>
+          <h3>Valoraciones</h3>
+          <p>Sin valoraciones (0 reseñas)</p>
+        </div>
+
+        <div>
+          <h3>Comentarios</h3>
+
+          <article class="comentario">
+            <header>
+              <p><strong>María F.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
+            </header>
+            <p>Buenísima novela, personajes muy humanos. Me encantó el retrato de Martha.</p>
+          </article>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Pablo D.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
+            </header>
+            <p>Historia envolvente sobre tres generaciones, aunque el ritmo del inicio es un poco lento.</p>
+          </article>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Carolina S.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
+            </header>
+            <p>Una mirada sincera sobre las familias de hoy y el paso del tiempo. La recomiendo.</p>
+          </article>
+        </div>
+
+        <form class="form_comentario">
+          <h3>Deja tu comentario</h3>
+
+          <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+
+          <div>
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" name="comentario" rows="4" required></textarea>
+          </div>
+
+          <div class="calif_estrellas">
+            <p>Tu calificación:</p>
+            <div class="estrellas_rating">
+              <input type="radio" id="star5" name="estrellas" value="5" required>
+              <label for="star5" title="5 estrellas">★</label>
+
+              <input type="radio" id="star4" name="estrellas" value="4">
+              <label for="star4" title="4 estrellas">★</label>
+
+              <input type="radio" id="star3" name="estrellas" value="3">
+              <label for="star3" title="3 estrellas">★</label>
+
+              <input type="radio" id="star2" name="estrellas" value="2">
+              <label for="star2" title="2 estrellas">★</label>
+
+              <input type="radio" id="star1" name="estrellas" value="1">
+              <label for="star1" title="1 estrella">★</label>
+            </div>
+          </div>
+
+          <button type="submit">Enviar comentario</button>
+        </form>
+      </section>
+
+      <a class="volver" href="index.html">Volver al inicio</a>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 E-Commerce - Proyecto Universitario</p>
+  </footer>
+
+</body>
+</html>

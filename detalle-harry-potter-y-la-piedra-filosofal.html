@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harry Potter y la piedra filosofal - Librería</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Logo</a>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#">Productos</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+      <div>
+        <a href="#">Carrito (0)</a>
+        <a href="#">Mi cuenta</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <article class="detalle-producto">
+      <figure>
+        <img src="https://images.cdn3.buscalibre.com/fit-in/660x660/f5/f2/f5f2e2edd647784f07b709f1fef82d1c.jpg"
+          alt="Tapa del libro Harry Potter y la piedra filosofal" width="200" height="300">
+      </figure>
+
+      <div class="informacion_principal">
+        <div class="info_libro">
+          <h1>Harry Potter y la piedra filosofal</h1>
+          <p class="autor">J. K. Rowling</p>
+          <p class="edicion"> <span class="fecha">1999 </span> - Salamandra </p>
+          <p class="formato">Físico</p>
+          <p class="paginas">256 páginas</p>
+          <p class="genero">#Fantasía  #LiteraturaJuvenil</p>
+          <p class="precio">$27000.00</p>
+          <p class="isbn">ISBN: 9788478884452</p>
+          <p class="disponibilidad">Disponibilidad: No especificada</p>
+          <p class="envio">Envío: No especificado</p>
+        </div>
+        <div class="interaccion_comprar">
+          <button type="button" class="btn-comprar">Comprar</button>
+          <button type="button" class="btn-carrito">Agregar al carrito</button>
+        </div>
+      </div>
+
+      <section class="descripcion">
+        <h2>Descripción</h2>
+        <p>
+          Harry Potter descubre en su undécimo cumpleaños que es un mago y que una carta
+          inesperada lo espera en el Colegio Hogwarts de Magia y Hechicería. Junto a sus
+          nuevos amigos Ron y Hermione, deberá enfrentar los misterios de la piedra filosofal
+          y los peligros que acechan en la escuela. El inicio de la saga más querida de la
+          literatura juvenil.
+        </p>
+      </section>
+
+      <section class="detalles_libro">
+        <h2>Informacion Adicional</h2>
+        <dl>
+          <dt>Formato</dt>
+          <dd>Físico</dd>
+          <dt>Edición</dt>
+          <dd>No especificada</dd>
+          <dt>Dimensiones</dt>
+          <dd>No especificado</dd>
+          <dt>Idioma</dt>
+          <dd>Español</dd>
+          <dt>editorial</dt>
+          <dd>Salamandra</dd>
+          <dt>año de publicación</dt>
+          <dd>1999 (edición en español; original 1997)</dd>
+          <dt>Numero de paginas</dt>
+          <dd>256</dd>
+          <dt>Clasificación</dt>
+          <dd>Apto para todo publico</dd>
+        </dl>
+      </section>
+
+      <section class="calificaciones_comentarios">
+        <h2>calificaciones y opiniones</h2>
+
+        <div>
+          <h3>Valoraciones</h3>
+          <p>Sin valoraciones (0 reseñas)</p>
+        </div>
+
+        <div>
+          <h3>Comentarios</h3>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Luna K.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
+            </header>
+            <p>El libro con el que crecí y al que siempre vuelvo. Edición hermosa.</p>
+          </article>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Bruno H.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
+            </header>
+            <p>Clásico absoluto. Si no lo leíste, te estás perdiendo de una aventura única.</p>
+          </article>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Micaela A.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
+            </header>
+            <p>Lo compré para regalar y quedó perfecto. La calidad de la edición es excelente.</p>
+          </article>
+        </div>
+
+        <form class="form_comentario">
+          <h3>Deja tu comentario</h3>
+
+          <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+
+          <div>
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" name="comentario" rows="4" required></textarea>
+          </div>
+
+          <div class="calif_estrellas">
+            <p>Tu calificación:</p>
+            <div class="estrellas_rating">
+              <input type="radio" id="star5" name="estrellas" value="5" required>
+              <label for="star5" title="5 estrellas">★</label>
+
+              <input type="radio" id="star4" name="estrellas" value="4">
+              <label for="star4" title="4 estrellas">★</label>
+
+              <input type="radio" id="star3" name="estrellas" value="3">
+              <label for="star3" title="3 estrellas">★</label>
+
+              <input type="radio" id="star2" name="estrellas" value="2">
+              <label for="star2" title="2 estrellas">★</label>
+
+              <input type="radio" id="star1" name="estrellas" value="1">
+              <label for="star1" title="1 estrella">★</label>
+            </div>
+          </div>
+
+          <button type="submit">Enviar comentario</button>
+        </form>
+      </section>
+
+      <a class="volver" href="index.html">Volver al inicio</a>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 E-Commerce - Proyecto Universitario</p>
+  </footer>
+
+</body>
+</html>
