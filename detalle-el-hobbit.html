@@ -30,57 +30,129 @@
           alt="Tapa del libro El Hobbit" width="200" height="300">
       </figure>
 
-      <h1>El Hobbit</h1>
-      <p class="autor">J. R. R. Tolkien</p>
-      <p class="precio">$45641.00</p>
-
-      <dl>
-        <dt>Formato</dt>
-        <dd>Físico</dd>
-        <dt>Edición</dt>
-        <dd>Estándar</dd>
-        <dt>Género literario</dt>
-        <dd>Fantasía / Aventura</dd>
-        <dt>Valoración</dt>
-        <dd>★★★★★ (4.7/5 · 431 reseñas)</dd>
-      </dl>
+      <div class="informacion_principal">
+        <div class="info_libro">
+          <h1>El Hobbit</h1>
+          <p class="autor">J. R. R. Tolkien</p>
+          <p class="edicion"> <span class="fecha">1937 </span> - Minotauro </p>
+          <p class="formato">Físico</p>
+          <p class="paginas">No especificado</p>
+          <p class="genero">#Fantasía  #Aventura</p>
+          <p class="precio">$45641.00</p>
+          <p class="isbn">ISBN: No disponible</p>
+          <p class="disponibilidad">Disponibilidad: No especificada</p>
+          <p class="envio">Envío: No especificado</p>
+        </div>
+        <div class="interaccion_comprar">
+          <button type="button" class="btn-comprar">Comprar</button>
+          <button type="button" class="btn-carrito">Agregar al carrito</button>
+        </div>
+      </div>
 
       <section class="descripcion">
         <h2>Descripción</h2>
         <p>
-          Bilbo Bolsón, un hobbit tranquilo y hogareño, es arrastrado a una aventura inesperada por el
-          mago Gandalf y una compañía de enanos que buscan recuperar su tesoro robado por el dragón
-          Smaug. En su viaje por la Tierra Media, Bilbo encontrará el Anillo que cambiará su destino.
-          La obra maestra que dio origen al legendario universo de Tolkien.
+          Bilbo Bolsón, un hobbit tranquilo y hogareño, es arrastrado a una aventura
+          inesperada por el mago Gandalf y una compañía de enanos que buscan recuperar su
+          tesoro robado por el dragón Smaug. En su viaje por la Tierra Media, Bilbo
+          encontrará el Anillo que cambiará su destino. La obra maestra que dio origen al
+          legendario universo de Tolkien.
         </p>
       </section>
 
-      <section class="comentarios">
-        <h2>Comentarios</h2>
-
-        <article class="comentario">
-          <header>
-            <p><strong>Mateo L.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
-          </header>
-          <p>Un clásico de la fantasía. La edición es de muy buena calidad.</p>
-        </article>
-
-        <article class="comentario">
-          <header>
-            <p><strong>Daniela P.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
-          </header>
-          <p>Ideal para empezar a leer a Tolkien. Aventura, humor y magia en cada página.</p>
-        </article>
-
-        <article class="comentario">
-          <header>
-            <p><strong>Lautaro G.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
-          </header>
-          <p>Me encantó, solo le pongo cuatro estrellas porque el tamaño de letra es algo pequeño.</p>
-        </article>
+      <section class="detalles_libro">
+        <h2>Informacion Adicional</h2>
+        <dl>
+          <dt>Formato</dt>
+          <dd>Físico</dd>
+          <dt>Edición</dt>
+          <dd>No especificada</dd>
+          <dt>Dimensiones</dt>
+          <dd>No especificado</dd>
+          <dt>Idioma</dt>
+          <dd>Español</dd>
+          <dt>editorial</dt>
+          <dd>Minotauro</dd>
+          <dt>año de publicación</dt>
+          <dd>No especificado (obra original de 1937)</dd>
+          <dt>Numero de paginas</dt>
+          <dd>No especificado (según edición)</dd>
+          <dt>Clasificación</dt>
+          <dd>Apto para todo publico</dd>
+        </dl>
       </section>
 
-      <a class="volver" href="index.html"><button type="button">Volver al inicio</button></a>
+      <section class="calificaciones_comentarios">
+        <h2>calificaciones y opiniones</h2>
+
+        <div>
+          <h3>Valoraciones</h3>
+          <p>Sin valoraciones (0 reseñas)</p>
+        </div>
+
+        <div>
+          <h3>Comentarios</h3>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Mateo L.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
+            </header>
+            <p>Un clásico de la fantasía. La edición es de muy buena calidad.</p>
+          </article>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Daniela P.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
+            </header>
+            <p>Ideal para empezar a leer a Tolkien. Aventura, humor y magia en cada página.</p>
+          </article>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Lautaro G.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
+            </header>
+            <p>Me encantó, solo le pongo cuatro estrellas porque el tamaño de letra es algo pequeño.</p>
+          </article>
+        </div>
+
+        <form class="form_comentario">
+          <h3>Deja tu comentario</h3>
+
+          <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+
+          <div>
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" name="comentario" rows="4" required></textarea>
+          </div>
+
+          <div class="calif_estrellas">
+            <p>Tu calificación:</p>
+            <div class="estrellas_rating">
+              <input type="radio" id="star5" name="estrellas" value="5" required>
+              <label for="star5" title="5 estrellas">★</label>
+
+              <input type="radio" id="star4" name="estrellas" value="4">
+              <label for="star4" title="4 estrellas">★</label>
+
+              <input type="radio" id="star3" name="estrellas" value="3">
+              <label for="star3" title="3 estrellas">★</label>
+
+              <input type="radio" id="star2" name="estrellas" value="2">
+              <label for="star2" title="2 estrellas">★</label>
+
+              <input type="radio" id="star1" name="estrellas" value="1">
+              <label for="star1" title="1 estrella">★</label>
+            </div>
+          </div>
+
+          <button type="submit">Enviar comentario</button>
+        </form>
+      </section>
+
+      <a class="volver" href="index.html">Volver al inicio</a>
     </article>
   </main>
 

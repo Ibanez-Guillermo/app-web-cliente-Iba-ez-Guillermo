@@ -30,57 +30,129 @@
           alt="Tapa del libro El principito (ed. de lujo)" width="200" height="300">
       </figure>
 
-      <h1>El principito (ed: de lujo)</h1>
-      <p class="autor">Antoine de Saint-Exupéry</p>
-      <p class="precio">$32100.00</p>
-
-      <dl>
-        <dt>Formato</dt>
-        <dd>Físico</dd>
-        <dt>Edición</dt>
-        <dd>Edición de lujo</dd>
-        <dt>Género literario</dt>
-        <dd>Fábula / Literatura clásica</dd>
-        <dt>Valoración</dt>
-        <dd>★★★★★ (4.8/5 · 289 reseñas)</dd>
-      </dl>
+      <div class="informacion_principal">
+        <div class="info_libro">
+          <h1>El principito (ed. de lujo)</h1>
+          <p class="autor">Antoine de Saint-Exupéry</p>
+          <p class="edicion"> <span class="fecha">2016 </span> - Granica </p>
+          <p class="formato">Físico</p>
+          <p class="paginas">112 páginas</p>
+          <p class="genero">#Fábula  #Clásico  #LiteraturaInfantil</p>
+          <p class="precio">$32100.00</p>
+          <p class="isbn">ISBN: 9789563162806</p>
+          <p class="disponibilidad">Disponibilidad: No especificada</p>
+          <p class="envio">Envío: No especificado</p>
+        </div>
+        <div class="interaccion_comprar">
+          <button type="button" class="btn-comprar">Comprar</button>
+          <button type="button" class="btn-carrito">Agregar al carrito</button>
+        </div>
+      </div>
 
       <section class="descripcion">
         <h2>Descripción</h2>
         <p>
-          Un aviador que cae en el desierto del Sahara conoce a un pequeño príncipe que viene de otro
-          planeta. A través de su conversación, Saint-Exupéry reflexiona sobre el amor, la amistad,
-          la soledad y las cosas verdaderamente importantes de la vida. Esta edición de lujo incluye
-          las ilustraciones originales del autor en una presentación cuidada para regalar o coleccionar.
+          Un aviador que cae en el desierto del Sahara conoce a un pequeño príncipe que viene
+          de otro planeta. A través de su conversación, Saint-Exupéry reflexiona sobre el amor,
+          la amistad, la soledad y las cosas verdaderamente importantes de la vida. Esta edición
+          de lujo incluye las ilustraciones originales del autor en una presentación cuidada
+          para regalar o coleccionar.
         </p>
       </section>
 
-      <section class="comentarios">
-        <h2>Comentarios</h2>
-
-        <article class="comentario">
-          <header>
-            <p><strong>Gabriela O.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
-          </header>
-          <p>"Lo esencial es invisible a los ojos". La edición de lujo es una verdadera joya.</p>
-        </article>
-
-        <article class="comentario">
-          <header>
-            <p><strong>Nicolás W.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
-          </header>
-          <p>Regalé esta edición y fue un éxito total. Las ilustraciones son preciosas.</p>
-        </article>
-
-        <article class="comentario">
-          <header>
-            <p><strong>Paula M.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
-          </header>
-          <p>Un clásico que todos deberían leer al menos una vez. Muy buena calidad de impresión.</p>
-        </article>
+      <section class="detalles_libro">
+        <h2>Informacion Adicional</h2>
+        <dl>
+          <dt>Formato</dt>
+          <dd>Físico</dd>
+          <dt>Edición</dt>
+          <dd>Edición de lujo (tapa dura)</dd>
+          <dt>Dimensiones</dt>
+          <dd>No especificado</dd>
+          <dt>Idioma</dt>
+          <dd>Español</dd>
+          <dt>editorial</dt>
+          <dd>Granica</dd>
+          <dt>año de publicación</dt>
+          <dd>2016 (esta edición; obra original de 1943)</dd>
+          <dt>Numero de paginas</dt>
+          <dd>112</dd>
+          <dt>Clasificación</dt>
+          <dd>Apto para todo publico</dd>
+        </dl>
       </section>
 
-      <a class="volver" href="index.html"><button type="button">Volver al inicio</button></a>
+      <section class="calificaciones_comentarios">
+        <h2>calificaciones y opiniones</h2>
+
+        <div>
+          <h3>Valoraciones</h3>
+          <p>Sin valoraciones (0 reseñas)</p>
+        </div>
+
+        <div>
+          <h3>Comentarios</h3>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Gabriela O.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
+            </header>
+            <p>"Lo esencial es invisible a los ojos". La edición de lujo es una verdadera joya.</p>
+          </article>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Nicolás W.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
+            </header>
+            <p>Regalé esta edición y fue un éxito total. Las ilustraciones son preciosas.</p>
+          </article>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Paula M.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
+            </header>
+            <p>Un clásico que todos deberían leer al menos una vez. Muy buena calidad de impresión.</p>
+          </article>
+        </div>
+
+        <form class="form_comentario">
+          <h3>Deja tu comentario</h3>
+
+          <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+
+          <div>
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" name="comentario" rows="4" required></textarea>
+          </div>
+
+          <div class="calif_estrellas">
+            <p>Tu calificación:</p>
+            <div class="estrellas_rating">
+              <input type="radio" id="star5" name="estrellas" value="5" required>
+              <label for="star5" title="5 estrellas">★</label>
+
+              <input type="radio" id="star4" name="estrellas" value="4">
+              <label for="star4" title="4 estrellas">★</label>
+
+              <input type="radio" id="star3" name="estrellas" value="3">
+              <label for="star3" title="3 estrellas">★</label>
+
+              <input type="radio" id="star2" name="estrellas" value="2">
+              <label for="star2" title="2 estrellas">★</label>
+
+              <input type="radio" id="star1" name="estrellas" value="1">
+              <label for="star1" title="1 estrella">★</label>
+            </div>
+          </div>
+
+          <button type="submit">Enviar comentario</button>
+        </form>
+      </section>
+
+      <a class="volver" href="index.html">Volver al inicio</a>
     </article>
   </main>
 

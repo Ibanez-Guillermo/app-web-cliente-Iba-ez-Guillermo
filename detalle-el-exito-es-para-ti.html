@@ -30,57 +30,129 @@
           alt="Tapa del libro El éxito es para ti" width="200" height="300">
       </figure>
 
-      <h1>El éxito es para ti</h1>
-      <p class="autor">Dr. David R. Hawkins</p>
-      <p class="precio">$37530.00</p>
-
-      <dl>
-        <dt>Formato</dt>
-        <dd>Físico</dd>
-        <dt>Edición</dt>
-        <dd>De bolsillo</dd>
-        <dt>Género literario</dt>
-        <dd>Autoayuda / Crecimiento personal</dd>
-        <dt>Valoración</dt>
-        <dd>★★★★☆ (4.3/5 · 54 reseñas)</dd>
-      </dl>
+      <div class="informacion_principal">
+        <div class="info_libro">
+          <h1>El éxito es para ti</h1>
+          <p class="autor">Dr. David R. Hawkins</p>
+          <p class="edicion"> <span class="fecha">2017 </span> - Ediciones El Grano de Mostaza </p>
+          <p class="formato">Físico</p>
+          <p class="paginas">236 páginas</p>
+          <p class="genero">#Autoayuda  #CrecimientoPersonal</p>
+          <p class="precio">$37530.00</p>
+          <p class="isbn">ISBN: 9788494679834</p>
+          <p class="disponibilidad">Disponibilidad: No especificada</p>
+          <p class="envio">Envío: No especificado</p>
+        </div>
+        <div class="interaccion_comprar">
+          <button type="button" class="btn-comprar">Comprar</button>
+          <button type="button" class="btn-carrito">Agregar al carrito</button>
+        </div>
+      </div>
 
       <section class="descripcion">
         <h2>Descripción</h2>
         <p>
           El Dr. David R. Hawkins explica las claves para alcanzar el éxito personal y profesional
-          a partir de los principios del desarrollo de la conciencia. A través de ejemplos y ejercicios
-          prácticos, el autor invita a soltar miedos y creencias limitantes para construir una vida
-          plena y en equilibrio. Un complemento ideal a "El poder frente a la fuerza".
+          a partir de los principios del desarrollo de la conciencia. A través de ejemplos y
+          ejercicios prácticos, el autor invita a soltar miedos y creencias limitantes para
+          construir una vida plena y en equilibrio. Un complemento ideal a "El poder frente a
+          la fuerza".
         </p>
       </section>
 
-      <section class="comentarios">
-        <h2>Comentarios</h2>
-
-        <article class="comentario">
-          <header>
-            <p><strong>Agustín V.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
-          </header>
-          <p>Cada capítulo te deja algo para aplicar al día siguiente. Muy recomendable.</p>
-        </article>
-
-        <article class="comentario">
-          <header>
-            <p><strong>Natalia B.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
-          </header>
-          <p>Me gustó más que el anterior del autor. La edición de bolsillo está muy bien lograda.</p>
-        </article>
-
-        <article class="comentario">
-          <header>
-            <p><strong>Franco E.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
-          </header>
-          <p>Buen libro para acompañar un proceso de crecimiento personal.</p>
-        </article>
+      <section class="detalles_libro">
+        <h2>Informacion Adicional</h2>
+        <dl>
+          <dt>Formato</dt>
+          <dd>Físico</dd>
+          <dt>Edición</dt>
+          <dd>Tapa blanda</dd>
+          <dt>Dimensiones</dt>
+          <dd>21.5 x 14.5 cm</dd>
+          <dt>Idioma</dt>
+          <dd>Español</dd>
+          <dt>editorial</dt>
+          <dd>Ediciones El Grano de Mostaza</dd>
+          <dt>año de publicación</dt>
+          <dd>2017</dd>
+          <dt>Numero de paginas</dt>
+          <dd>236</dd>
+          <dt>Clasificación</dt>
+          <dd>Apto para todo publico</dd>
+        </dl>
       </section>
 
-      <a class="volver" href="index.html"><button type="button">Volver al inicio</button></a>
+      <section class="calificaciones_comentarios">
+        <h2>calificaciones y opiniones</h2>
+
+        <div>
+          <h3>Valoraciones</h3>
+          <p>Sin valoraciones (0 reseñas)</p>
+        </div>
+
+        <div>
+          <h3>Comentarios</h3>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Agustín V.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
+            </header>
+            <p>Cada capítulo te deja algo para aplicar al día siguiente. Muy recomendable.</p>
+          </article>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Natalia B.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
+            </header>
+            <p>Me gustó cómo conecta el éxito con el desarrollo de la conciencia.</p>
+          </article>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Franco E.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
+            </header>
+            <p>Buen libro para acompañar un proceso de crecimiento personal.</p>
+          </article>
+        </div>
+
+        <form class="form_comentario">
+          <h3>Deja tu comentario</h3>
+
+          <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+
+          <div>
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" name="comentario" rows="4" required></textarea>
+          </div>
+
+          <div class="calif_estrellas">
+            <p>Tu calificación:</p>
+            <div class="estrellas_rating">
+              <input type="radio" id="star5" name="estrellas" value="5" required>
+              <label for="star5" title="5 estrellas">★</label>
+
+              <input type="radio" id="star4" name="estrellas" value="4">
+              <label for="star4" title="4 estrellas">★</label>
+
+              <input type="radio" id="star3" name="estrellas" value="3">
+              <label for="star3" title="3 estrellas">★</label>
+
+              <input type="radio" id="star2" name="estrellas" value="2">
+              <label for="star2" title="2 estrellas">★</label>
+
+              <input type="radio" id="star1" name="estrellas" value="1">
+              <label for="star1" title="1 estrella">★</label>
+            </div>
+          </div>
+
+          <button type="submit">Enviar comentario</button>
+        </form>
+      </section>
+
+      <a class="volver" href="index.html">Volver al inicio</a>
     </article>
   </main>
 
