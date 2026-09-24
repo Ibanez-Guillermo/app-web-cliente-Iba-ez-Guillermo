@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El arte de desaprender - Librería</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Logo</a>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#">Productos</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+      <div>
+        <a href="#">Carrito (0)</a>
+        <a href="#">Mi cuenta</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <article class="detalle-producto">
+      <figure>
+        <img src="https://images.cdn2.buscalibre.com/fit-in/660x660/89/45/894543157fb75caedbe2fd269c1815b6.jpg"
+          alt="Tapa del libro El arte de desaprender" width="200" height="300">
+      </figure>
+      
+      <!--         Inicio del cambio        -->
+      <!--         meter en un div para aplicar css después        -->
+      <div class="informacion_principal">
+        <div class="info_libro">
+          <h1>El arte de desaprender</h1>
+          <p class="autor">Enric Corbera</p>
+          <!--         Inicio del cambio      -->
+          <!--  Agregue la fecha de edición y el formato del libro como parte de la información principal y numero de paginas -->          
+          <p class="edicion"> <span class="fecha">2017 </span> - El grano de mostaza ediciones </p>
+          <p class="formato">Electrónico</p>
+          <p class="paginas">320 páginas</p>
+          <!--         Fin del cambio         -->
+        <!-- agregar genero literario como parte de la información principal  -->
+          <p class="genero">#Autoayuda  #Espiritualidad</p>
+          <p class="precio">$16500.00</p>
+          <p class="isbn">ISBN: 978-987-4170-00-3</p>
+          <p class="disponibilidad">Disponibilidad: No aplica</p>
+          <p class="envio">Envío: No aplica</p>
+        </div>  
+      <!--         Inicio del cambio        -->
+      <!--         Agregue un boton de compra y de carrito        -->
+        <div class="interaccion_comprar">
+          <button type="button" class="btn-comprar">Comprar</button>
+          <button type="button" class="btn-carrito">Agregar al carrito</button>
+        </div>
+      <!--         Fin del cambio         -->
+      </div>
+      <!--         Fin del cambio         -->
+      
+      <!--         Inicio del cambio        -->
+      <!--    Movi la descripcion de debajo de las caracteristicas a encima de las caracteristicas    -->
+      <section class="descripcion">
+        <h2>Descripción</h2>
+        <p>
+          Enric Corbera propone un camino de transformación personal a través de la bioneuroemoción:
+          aprender a soltar las creencias y patrones heredados que nos limitan para reconectar con
+          nuestra verdadera esencia. Un libro para desandar lo aprendido y vivir con mayor libertad
+          emocional. Disponible en formato digital.
+        </p>
+      </section>
+      <!--         Fin del cambio         -->
+      
+      <!--         Encerré en una sección las caracteristicas y creé una clase      -->
+      <section class="detalles_libro">
+        <h2>Informacion Adicional</h2>
+        <dl>
+          <dt>Formato</dt>
+          <dd>Electrónico</dd>
+          <dt>Edición</dt>
+          <dd>No aplica (formato digital)</dd>
+          <dt>Dimensiones</dt>
+          <dd>No aplica</dd>
+          <!--         Inicio del cambio        -->
+               <!--  Caracteristicas agregadas    -->
+          <dt>Idioma</dt>
+          <dd>Español</dd>
+          <dt>editorial</dt>
+          <dd>El grano de mostaza ediciones</dd>
+          <dt>año de publicación</dt>
+          <dd>2017</dd>
+          <dt>Numero de paginas</dt>
+          <dd>320</dd>
+          <dt>Clasificación</dt>
+          <dd>Apto para todo publico</dd>
+          <!--         Fin del cambio         -->
+        </dl>
+      </section>
+
+      <!-- encerré las calificaciones y comentarios en una sola sección separandolas por <div> -->
+      <section class="calificaciones_comentarios">
+        <h2>calificaciones y opiniones</h2>
+        <!--         Inicio del cambio        -->
+        <!-- Encerrar las valoraciones en un <div> en lugar de <dl> -->
+        <div>
+          <h3>Valoraciones</h3>  <!--cambiar <dt> por <h3></h3> -->
+          <p>★★★★☆ (4.1/5 · 87 reseñas)</p> <!--cambiar <dd> por <p></p> -->
+        </div>
+        <!--         Fin del cambio         -->
+      
+        <div>
+          <h3>Comentarios</h3>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Eugenia S.</strong> · <span aria-label="5 estrellas">★★★★★</span></p>
+            </header>
+            <p>Me ayudó a repensar muchas creencias que arrastraba. Lectura que invita a reflexionar.</p>
+          </article>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Raúl F.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
+            </header>
+            <p>Interesante, aunque algunos conceptos requieren profundizar con otros textos del autor.</p>
+          </article>
+
+          <article class="comentario">
+            <header>
+              <p><strong>Belén A.</strong> · <span aria-label="4 estrellas">★★★★☆</span></p>
+            </header>
+            <p>Buen libro digital, cómodo para leer en cualquier momento. Lo recomiendo.</p>
+          </article>
+        </div>
+        <!--Voy a agregar un formulario para enviar comentarios -->
+        <form class="form_comentario">
+          <h3>Deja tu comentario</h3>
+
+          <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+
+          <div>
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" name="comentario" rows="4" required></textarea>
+          </div>
+
+          <div class="calif_estrellas">
+            <p>Tu calificación:</p>
+            <div class="estrellas_rating">
+              <input type="radio" id="star5" name="estrellas" value="5" required>
+              <label for="star5" title="5 estrellas">★</label>
+
+              <input type="radio" id="star4" name="estrellas" value="4">
+              <label for="star4" title="4 estrellas">★</label>
+
+              <input type="radio" id="star3" name="estrellas" value="3">
+              <label for="star3" title="3 estrellas">★</label>
+
+              <input type="radio" id="star2" name="estrellas" value="2">
+              <label for="star2" title="2 estrellas">★</label>
+
+              <input type="radio" id="star1" name="estrellas" value="1">
+              <label for="star1" title="1 estrella">★</label>
+            </div>
+          </div>
+
+          <button type="submit">Enviar comentario</button>
+        </form>
+      </section>
+
+      <a class="volver" href="index.html">Volver al inicio</a>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 E-Commerce - Proyecto Universitario</p>
+  </footer>
+
+</body>
+</html>
