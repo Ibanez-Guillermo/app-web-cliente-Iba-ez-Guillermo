@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finalizar compra - Biblionet</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <h1>
+        <a href="index.html">Biblionet</a>
+      </h1>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#catalogo_productos">Catalogo</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <div>
+        <a href="carrito.html">Carrito</a>
+        <a href="cuenta.html">Mi cuenta</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="finalizar_compra">
+      <h1>Finalizar compra</h1>
+      <p>Completá los datos de envío y pago para confirmar tu pedido.</p>
+
+      <form action="#" method="post">
+
+        <!-- Datos de envio -->
+        <section class="datos_envio">
+          <h2>Dirección de entrega</h2>
+
+          <div>
+            <label for="nombre_completo">Nombre completo:</label>
+            <input type="text" id="nombre_completo" name="nombre_completo" placeholder="Tu nombre y apellido" required>
+          </div>
+
+          <div>
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" id="ciudad" name="ciudad" value="Ciudad Autónoma de Buenos Aires" required>
+          </div>
+
+          <div>
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" value="Av. Siempre Viva 742" required>
+          </div>
+
+          <div>
+            <label for="codigo_postal">Código postal:</label>
+            <input type="text" id="codigo_postal" name="codigo_postal" placeholder="Ej: 1414" required>
+          </div>
+
+          <div>
+            <label for="instrucciones_adicionales">Instrucciones adicionales (opcional):</label>
+            <textarea id="instrucciones_adicionales" name="instrucciones_adicionales" rows="3"
+              placeholder="Ej: Dejar el pedido en portería"></textarea>
+          </div>
+        </section>
+
+        <!-- Metodo de pago -->
+        <section class="metodo_pago">
+          <h2>Método de pago</h2>
+
+          <div>
+            <label for="metodo_pago">Tipo de pago:</label>
+            <input type="text" id="metodo_pago" name="metodo_pago" list="opciones_metodo_pago"
+              value="Tarjeta de crédito" required>
+            <datalist id="opciones_metodo_pago">
+              <option value="Tarjeta de débito">
+              <option value="Tarjeta de crédito">
+              <option value="Mercado Pago">
+              <option value="Pago Fácil (efectivo)">
+              <option value="RapiPago (efectivo)">
+            </datalist>
+          </div>
+
+          <h3>Datos de la tarjeta</h3>
+
+          <div>
+            <label for="numero_tarjeta">Número de tarjeta:</label>
+            <input type="text" id="numero_tarjeta" name="numero_tarjeta" placeholder="1234 5678 9012 3456" required>
+          </div>
+
+          <div>
+            <label for="vencimiento">Vencimiento:</label>
+            <input type="text" id="vencimiento" name="vencimiento" placeholder="MM/AA" required>
+          </div>
+
+          <div>
+            <label for="cvc">CVC:</label>
+            <input type="password" id="cvc" name="cvc" placeholder="***" maxlength="3" required>
+          </div>
+        </section>
+
+        <!-- Resumen del pedido -->
+        <section class="resumen_pedido">
+          <h2>Resumen del pedido</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Formato</th>
+                <th>Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="detalle-no-me-puedes-lastimar.html">No me puedes lastimar</a></td>
+                <td>David Goggins</td>
+                <td>Físico</td>
+                <td>$33000.00</td>
+              </tr>
+
+              <tr>
+                <td><a href="detalle-el-hobbit.html">El Hobbit</a></td>
+                <td>J. R. R. Tolkien</td>
+                <td>Físico</td>
+                <td>$45641.00</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <dl class="totales_pedido">
+            <dt>Subtotal</dt>
+            <dd>$78641.00</dd>
+
+            <dt>Envío</dt>
+            <dd>$7000.00</dd>
+
+            <dt>Total a pagar</dt>
+            <dd>$85641.00</dd>
+          </dl>
+        </section>
+
+        <!-- Acciones -->
+        <div class="acciones_compra">
+          <button type="submit">Confirmar compra</button>
+          <a href="carrito.html">Modificar carrito</a>
+          <a href="index.html">Cancelar compra</a>
+          <a href="index.html">Volver a inicio</a>
+        </div>
+
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 E-Commerce - Proyecto Universitario</p>
+  </footer>
+
+</body>
+
+</html>

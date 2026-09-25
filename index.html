@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Librería</title>
+  <title>inicio-Biblionet</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -12,10 +12,12 @@
 
   <header>
     <nav>
-      <a href="index.html">Logo</a>
+      <h1>
+        <a href="index.html">Biblionet</a>
+      </h1>
       <ul>
         <li><a href="index.html">Inicio</a></li>
-        <li><a href="#">Productos</a></li>
+        <li><a href="index.html#catalogo_productos">Catalogo</a></li>
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
       <div>
@@ -28,17 +30,38 @@
   <main>
     <section class="filtros">
       <h2>Filtros</h2>
-      <form>
+      <form id="form_filtros">
         <fieldset>
-          <legend>Categoría</legend>
-          <label><input type="checkbox"> Crecimiento personal</label>
-          <label><input type="checkbox"> Finanzas</label>
-          <label><input type="checkbox"> Habilidades</label>
+          <legend>Género</legend>
+          <label for="filtro_genero">Buscar por género:</label>
+          <input type="text" id="filtro_genero" name="genero" list="lista_generos"
+            placeholder="Escribí o seleccioná un género...">
+
+          <datalist id="lista_generos">
+            <option value="Aventura">
+            <option value="Autoayuda">
+            <option value="Ciencia Ficción">
+            <option value="Clásico">
+            <option value="Desarrollo Profesional">
+            <option value="Épica">
+            <option value="Esoterismo">
+            <option value="Espiritualidad">
+            <option value="Fábula">
+            <option value="Fantasía">
+            <option value="Ficción">
+            <option value="Filosofía">
+            <option value="Literatura Infantil">
+            <option value="Literatura Juvenil">
+            <option value="Motivación">
+            <option value="Negociación">
+            <option value="Novela Contemporánea">
+            <option value="Psicología">
+          </datalist>
         </fieldset>
       </form>
     </section>
 
-    <section class="productos">
+    <section class="productos" id="catalogo_productos">
       <h2>Catalogo</h2>
       <article>
         <img src="https://images.cdn3.buscalibre.com/fit-in/660x660/b3/9c/b39ccc1c05e32ec142a2c2d42300bb29.jpg"
@@ -46,6 +69,7 @@
         <h3><a href="detalle-no-me-puedes-lastimar.html">No me puedes lastimar</a></h3>
         <p>Fisico</p>
         <p class="autor"> David Goggins</p>
+        <p class="genero">#Autoayuda #Motivación</p>
         <p>$33000.00</p>
         <a href="detalle-no-me-puedes-lastimar.html"><button>Ver detalles</button></a>
       </article>
@@ -56,6 +80,7 @@
         <h3><a href="detalle-rompe-la-barrera-del-no.html">Rompe la barrera del no</a></h3>
         <p>Fisico</p>
         <p class="autor"> Chris Voss</p>
+        <p class="genero">#Negociación #DesarrolloProfesional</p>
         <p>$27000.00</p>
         <a href="detalle-rompe-la-barrera-del-no.html"><button>Ver detalles</button></a>
       </article>
@@ -67,6 +92,7 @@
         <h3><a href="detalle-el-poder-frente-a-la-fuerza.html">El poder frente a la fuerza</a></h3>
         <p>Fisico</p>
         <p class="autor"> Dr. David R. Hawkins </p>
+        <p class="genero">#Espiritualidad #Autoayuda</p>
         <p>$60000.00</p>
         <a href="detalle-el-poder-frente-a-la-fuerza.html"><button>Ver detalles</button></a>
       </article>
@@ -77,6 +103,7 @@
         <h3><a href="detalle-una-familia-moderna.html">Una familia moderna</a></h3>
         <p>Fisico</p>
         <p class="autor"> Julia Navarro</p>
+        <p class="genero">#NovelaContemporánea #Ficción</p>
         <p>$64000.00</p>
         <a href="detalle-una-familia-moderna.html"><button>Ver detalles</button></a>
       </article>
@@ -87,6 +114,7 @@
         <h3><a href="detalle-el-exito-es-para-ti.html">El exito es para ti</a></h3>
         <p>Fisico</p>
         <p class="autor"> Dr. David R. Hawkins</p>
+        <p class="genero">#Esoterismo</p>
         <p>$37530.00</p>
         <a href="detalle-el-exito-es-para-ti.html"><button>Ver detalles</button></a>
       </article>
@@ -97,6 +125,7 @@
         <h3><a href="detalle-un-lugar-entre-las-estrellas.html">Un lugar entre las estrellas</a></h3>
         <p>Electronico</p>
         <p class="autor"> J. M. Sarmiento</p>
+        <p class="genero">#CienciaFicción #Aventura</p>
         <p>$1500.00</p>
         <a href="detalle-un-lugar-entre-las-estrellas.html"><button>Ver detalles</button></a>
       </article>
@@ -107,6 +136,7 @@
         <h3><a href="detalle-entre-dioses-y-la-tierra.html">Entre Dioses y la tierra</a></h3>
         <p>Electronico</p>
         <p class="autor"> J. M. Sarmiento</p>
+        <p class="genero">#Fantasía #Épica</p>
         <p>$1200.00</p>
         <a href="detalle-entre-dioses-y-la-tierra.html"><button>Ver detalles</button></a>
       </article>
@@ -118,6 +148,7 @@
         <h3><a href="detalle-el-arte-de-la-guerra.html">El arte de la guerra</a></h3>
         <p>Fisico</p>
         <p class="autor"> Sun Tzu</p>
+        <p class="genero">#Filosofía #Psicología</p>
         <p>$33000.00</p>
         <a href="detalle-el-arte-de-la-guerra.html"><button>Ver detalles</button></a>
       </article>
@@ -128,6 +159,7 @@
         <h3><a href="detalle-harry-potter-y-la-piedra-filosofal.html">Harry potter 1 y la piedra filosofal</a></h3>
         <p>Fisico</p>
         <p class="autor"> J. K. Rowling</p>
+        <p class="genero">#Fantasía #LiteraturaJuvenil</p>
         <p>$27000.00</p>
         <a href="detalle-harry-potter-y-la-piedra-filosofal.html"><button>Ver detalles</button></a>
       </article>
@@ -138,6 +170,7 @@
         <h3><a href="detalle-el-principito.html">El principito (ed: de lujo)</a></h3>
         <p>Fisico</p>
         <p class="autor"> Antoine de Saint-Exupéry</p>
+        <p class="genero">#Fábula #Clásico #LiteraturaInfantil</p>
         <p>$32100.00</p>
         <a href="detalle-el-principito.html"><button>Ver detalles</button></a>
       </article>
@@ -148,6 +181,7 @@
         <h3><a href="detalle-el-arte-de-desaprender.html">El arte de desaprender</a></h3>
         <p>Electronico</p>
         <p class="autor"> EnricCorbera</p>
+        <p class="genero"> #Autoayuda #Espiritualidad</p>
         <p>$16500.00</p>
         <a href="detalle-el-arte-de-desaprender.html"><button>Ver detalles</button></a>
       </article>
@@ -158,6 +192,7 @@
         <h3><a href="detalle-yo-realidad-y-subjetividad.html">Yo, realidad y subjetividad</a></h3>
         <p>Electronico</p>
         <p class="autor"> Dr. David R. Hawkins</p>
+        <p class="genero">#Espiritualidad #Filosofía</p>
         <p>$17302.00</p>
         <a href="detalle-yo-realidad-y-subjetividad.html"><button>Ver detalles</button></a>
       </article>
@@ -169,6 +204,7 @@
         <h3><a href="detalle-el-hobbit.html">El Hobbit</a></h3>
         <p>Fisico</p>
         <p class="autor"> J. R. R. Tolkein</p>
+        <p class="genero">#Fantasía #Aventura</p>
         <p>$45641.00</p>
         <a href="detalle-el-hobbit.html"><button>Ver detalles</button></a>
       </article>
