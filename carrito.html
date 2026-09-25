@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito - Librería</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Logo</a>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#">Productos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <div>
+        <a href="carrito.html">Carrito (2)</a>
+        <a href="#">Mi cuenta</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="carrito">
+      <h1>Carrito de compras</h1>
+      <p>Revisá los libros que elegiste antes de finalizar tu compra.</p>
+
+      <!-- Productos en el carrito -->
+      <section class="productos_carrito">
+        <h2>Productos en tu carrito</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Libro</th>
+              <th>Autor</th>
+              <th>Formato</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img src="https://images.cdn3.buscalibre.com/fit-in/660x660/b3/9c/b39ccc1c05e32ec142a2c2d42300bb29.jpg"
+                  alt="Tapa del libro No me puedes lastimar" width="60" height="90">
+              </td>
+              <td><a href="detalle-no-me-puedes-lastimar.html">No me puedes lastimar</a></td>
+              <td>David Goggins</td>
+              <td>Físico</td>
+              <td>$33000.00</td>
+              <td>
+                <input type="number" value="1" min="1" aria-label="Cantidad de No me puedes lastimar">
+              </td>
+              <td>
+                <button type="button" class="btn_eliminar">Eliminar</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf9g4oB2AH-mW3Vk2hDeHKW4NCYKcneBOXgwLeeEKoAM43I-m-ptXk_Wk&s=10"
+                  alt="Tapa del libro El Hobbit" width="60" height="90">
+              </td>
+              <td><a href="detalle-el-hobbit.html">El Hobbit</a></td>
+              <td>J. R. R. Tolkien</td>
+              <td>Físico</td>
+              <td>$45641.00</td>
+              <td>
+                <input type="number" value="1" min="1" aria-label="Cantidad de El Hobbit">
+              </td>
+              <td>
+                <button type="button" class="btn_eliminar">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="acciones_carrito">
+          <button type="button" class="btn_vaciar">Vaciar carrito</button>
+        </div>
+      </section>
+
+      <!-- Resumen de la compra -->
+      <section class="resumen_compra">
+        <h2>Resumen de la compra</h2>
+
+        <dl>
+          <dt>Subtotal</dt>
+          <dd>$78641.00</dd>
+
+          <dt>Costo de envío</dt>
+          <dd>$7000.00</dd>
+
+          <dt>Total a pagar</dt>
+          <dd>$85641.00</dd>
+        </dl>
+
+        <p class="nota_envio">El costo de envío solo aplica a los libros físicos.</p>
+
+        <button type="button" class="btn_comprar">Finalizar compra</button>
+      </section>
+
+      <a class="seguir_comprando" href="index.html">Seguir comprando</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 E-Commerce - Proyecto Universitario</p>
+  </footer>
+
+</body>
+
+</html>
