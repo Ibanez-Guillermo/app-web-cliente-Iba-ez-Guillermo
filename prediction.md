@@ -6,3 +6,5 @@ Predicciones:
 5. Voy a crear una pagina de contacto que se conecte con el index html y las paginas de detalle de producto.
 6. Voy a crear una pagina de carrito que se conecte a index.html para poder consultar y agregar productos. se conectará al index html y a las demás paginas. 
 7. Voy a crear la pagina de la cuenta simulando una sesión iniciada como prototipo de como se vería esta cuenta. va a contener datos como nombre de usuario, email del usuario, dirección. etc.
+8. Voy a crear una pagina que simule la finalización de la compra con datos preseleccionados del carrito.
+9. Actualización de información y nombre de librería.
