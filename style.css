@@ -1,0 +1,509 @@
+/* ==========================================================================
+   Biblionet - css.style
+   --------------------------------------------------------------------------
+   Alcance de este archivo:
+     - Reset universal
+     - Variables de diseño (:root)
+     - Header + Nav  (regla universal: se repite en las 18 paginas)
+     - Footer        (regla universal: se repite en las 18 paginas)
+     - index.html: catalogo (#catalogo_productos) y filtros (.filtros)
+
+   Paleta: verde + crema. Todo el diseño sale de las variables de :root.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. RESET UNIVERSAL
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--fuente);
+  font-size: var(--fs-base);
+  line-height: var(--lh);
+  color: var(--texto);
+  background-color: var(--crema);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+fieldset {
+  border: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+address {
+  font-style: normal;
+}
+
+
+/* ==========================================================================
+   2. VARIABLES DE DISENO (:root)
+   ========================================================================== */
+
+:root {
+  /* --- Verde --- */
+  --verde: #2f6b4f;
+  --verde-oscuro: #245440;
+  --verde-claro: #e8f0ea;
+
+  /* --- Crema --- */
+  --crema: #faf7f0;
+  --crema-oscuro: #f1ebdf;
+
+  /* --- Neutros --- */
+  --blanco: #ffffff;
+  --texto: #1e2a23;
+  --texto-suave: #6c7a71;
+  --borde: #e2dccf;
+
+  /* --- Tipografia --- */
+  --fuente: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --fs-xs: 0.72rem;
+  --fs-sm: 0.85rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.15rem;
+  --fs-xl: 1.4rem;
+  --lh: 1.6;
+
+  /* --- Espaciado --- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+
+  /* --- Bordes y radios --- */
+  --radio-sm: 6px;
+  --radio: 10px;
+  --radio-lg: 14px;
+  --transicion: 160ms ease;
+
+  /* --- Layout --- */
+  --ancho-max: 1200px;
+  --alto-barra: 5px;
+}
+
+
+/* ==========================================================================
+   3. HEADER + NAV   (regla universal, igual en todas las paginas)
+   ========================================================================== */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--crema);
+  border-bottom: 1px solid var(--borde);
+}
+
+nav {
+  max-width: var(--ancho-max);
+  margin-inline: auto;
+  padding: var(--sp-4) var(--sp-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+/* --- Marca: nombre de la libreria encima de la barra lateral verde --- */
+
+nav h1 {
+  display: flex;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+nav h1 a {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0 0 var(--sp-1) var(--sp-3);
+  border-left: var(--alto-barra) solid var(--verde);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  transition: color var(--transicion);
+}
+
+nav h1 a:hover {
+  color: var(--verde);
+}
+
+/* --- Links del menu --- */
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+nav ul a {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radio-sm);
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  transition: background-color var(--transicion), color var(--transicion);
+}
+
+nav ul a:hover {
+  background-color: var(--verde);
+  color: var(--blanco);
+}
+
+/* --- Acciones: Carrito / Mi cuenta --- */
+
+nav > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+nav > div a {
+  padding: var(--sp-2) var(--sp-4);
+  border: 1px solid var(--verde);
+  border-radius: 999px;
+  color: var(--verde);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color var(--transicion), color var(--transicion);
+}
+
+nav > div a:hover {
+  background-color: var(--verde);
+  color: var(--blanco);
+}
+
+
+/* ==========================================================================
+   4. FOOTER   (regla universal, igual en todas las paginas)
+   ========================================================================== */
+
+footer {
+  margin-top: var(--sp-7);
+  padding: var(--sp-5);
+  background-color: var(--verde);
+  color: var(--crema);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+footer a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+footer a:hover {
+  color: var(--blanco);
+}
+
+
+/* ==========================================================================
+   5. CONTENEDOR
+   ========================================================================== */
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--ancho-max);
+  margin-inline: auto;
+  padding: var(--sp-6) var(--sp-5);
+}
+
+/* El header es fijo: deja aire para que el ancla no quede tapada */
+#catalogo_productos,
+#form_filtros {
+  scroll-margin-top: 90px;
+}
+
+
+/* ==========================================================================
+   6. INDEX - FILTROS
+   ========================================================================== */
+
+.filtros {
+  margin-bottom: var(--sp-6);
+  padding: var(--sp-5);
+  background-color: var(--crema-oscuro);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+}
+
+.filtros h2 {
+  margin-bottom: var(--sp-4);
+  font-size: var(--fs-lg);
+}
+
+.filtros legend {
+  padding: 0;
+  margin-bottom: var(--sp-3);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--verde);
+}
+
+.filtros label {
+  display: block;
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-sm);
+}
+
+#filtro_genero {
+  width: 100%;
+  max-width: 360px;
+  padding: var(--sp-3);
+  background-color: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  font-size: var(--fs-sm);
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+
+#filtro_genero:hover {
+  border-color: var(--verde-claro);
+}
+
+#filtro_genero:focus {
+  outline: none;
+  border-color: var(--verde);
+  box-shadow: 0 0 0 3px var(--verde-claro);
+}
+
+#filtro_genero::placeholder {
+  color: var(--texto-suave);
+}
+
+
+/* ==========================================================================
+   7. INDEX - CATALOGO
+   ========================================================================== */
+
+#catalogo_productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  gap: var(--sp-5);
+}
+
+/* El titulo ocupa toda la fila del grid */
+#catalogo_productos > h2 {
+  grid-column: 1 / -1;
+  padding-bottom: var(--sp-3);
+  border-bottom: 2px solid var(--verde);
+  font-size: var(--fs-lg);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+#catalogo_productos article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-4);
+  background-color: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  transition: border-color var(--transicion), transform var(--transicion);
+}
+
+#catalogo_productos article:hover {
+  transform: translateY(-3px);
+  border-color: var(--verde);
+}
+
+#catalogo_productos img {
+  width: 100%;
+  margin-bottom: var(--sp-3);
+  background-color: var(--crema-oscuro);
+  border-radius: var(--radio);
+}
+
+#catalogo_productos h3 {
+  font-size: var(--fs-base);
+  line-height: 1.35;
+}
+
+#catalogo_productos h3 a {
+  transition: color var(--transicion);
+}
+
+#catalogo_productos h3 a:hover {
+  color: var(--verde);
+}
+
+/* Formato: primer parrafo del article */
+#catalogo_productos article > p:first-of-type {
+  color: var(--texto-suave);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+#catalogo_productos .autor {
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+}
+
+#catalogo_productos .genero {
+  color: var(--verde);
+  font-size: var(--fs-xs);
+}
+
+/* Precio: ultimo parrafo, se pega al fondo de la tarjeta */
+#catalogo_productos article > p:last-of-type {
+  margin-top: auto;
+  padding-top: var(--sp-2);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+}
+
+#catalogo_productos article > a:last-child {
+  margin-top: var(--sp-3);
+}
+
+#catalogo_productos button {
+  width: 100%;
+  padding: var(--sp-3);
+  background-color: var(--verde);
+  color: var(--blanco);
+  border-radius: var(--radio);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: background-color var(--transicion);
+}
+
+#catalogo_productos button:hover {
+  background-color: var(--verde-oscuro);
+}
+
+
+/* ==========================================================================
+   8. RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 860px) {
+  nav {
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  nav ul,
+  nav > div {
+    justify-content: center;
+    width: 100%;
+  }
+
+  nav > div a {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  #catalogo_productos {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--sp-4);
+  }
+}
+
+@media (max-width: 520px) {
+  /* El header deja de ser fijo para no comer altura de pantalla */
+  header {
+    position: static;
+  }
+
+  nav,
+  main {
+    padding: var(--sp-4) var(--sp-3);
+  }
+
+  .filtros {
+    padding: var(--sp-4);
+  }
+
+  #filtro_genero {
+    max-width: 100%;
+  }
+
+  #catalogo_productos {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #catalogo_productos article {
+    padding: var(--sp-3);
+  }
+}

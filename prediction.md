@@ -8,3 +8,5 @@ Predicciones:
 7. Voy a crear la pagina de la cuenta simulando una sesión iniciada como prototipo de como se vería esta cuenta. va a contener datos como nombre de usuario, email del usuario, dirección. etc.
 8. Voy a crear una pagina que simule la finalización de la compra con datos preseleccionados del carrito.
 9. Actualización de información y nombre de librería.
+10. Actualizacion: Actualizare Información de contacto y nombre de usuario. Tambien las redes sociales
+11. Creare un archivo Css para maquetar el index html y el header y footer de todas las paginas así tambien como nav.
