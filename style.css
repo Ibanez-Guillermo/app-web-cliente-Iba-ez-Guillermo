@@ -7,6 +7,11 @@
      - Header + Nav  (regla universal: se repite en las 18 paginas)
      - Footer        (regla universal: se repite en las 18 paginas)
      - index.html: catalogo (#catalogo_productos) y filtros (.filtros)
+     - Paginas de detalle de producto: detalle-*.html
+     - carrito.html
+     - contacto.html
+     - cuenta.html
+     - fin-compra.html
 
    Paleta: verde + crema. Todo el diseño sale de las variables de :root.
    ========================================================================== */
@@ -496,5 +501,1058 @@ main {
 
   #catalogo_productos .tarjeta {
     padding: var(--sp-3);
+  }
+}
+
+
+/* ==========================================================================
+   9. CONTROLES DE FORMULARIO
+      (compartido por: detalle-*.html, contacto.html y fin-compra.html)
+   ========================================================================== */
+
+.form_comentario label,
+.formulario_contacto label,
+.datos_envio label,
+.metodo_pago label {
+  display: block;
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.form_comentario input[type="text"],
+.formulario_contacto input[type="text"],
+.formulario_contacto input[type="email"],
+.formulario_contacto textarea,
+.datos_envio input[type="text"],
+.datos_envio textarea,
+.metodo_pago input[type="text"],
+.metodo_pago input[type="password"] {
+  width: 100%;
+  padding: var(--sp-3);
+  background-color: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  font-size: var(--fs-sm);
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+
+.form_comentario input[type="text"]:hover,
+.formulario_contacto input[type="text"]:hover,
+.formulario_contacto input[type="email"]:hover,
+.formulario_contacto textarea:hover,
+.datos_envio input[type="text"]:hover,
+.datos_envio textarea:hover,
+.metodo_pago input[type="text"]:hover,
+.metodo_pago input[type="password"]:hover {
+  border-color: var(--verde-claro);
+}
+
+.form_comentario input:focus,
+.form_comentario textarea:focus,
+.formulario_contacto input:focus,
+.formulario_contacto textarea:focus,
+.datos_envio input:focus,
+.datos_envio textarea:focus,
+.metodo_pago input:focus {
+  outline: none;
+  border-color: var(--verde);
+  box-shadow: 0 0 0 3px var(--verde-claro);
+}
+
+.form_comentario ::placeholder,
+.formulario_contacto ::placeholder,
+.datos_envio ::placeholder,
+.metodo_pago ::placeholder {
+  color: var(--texto-suave);
+}
+
+main form button[type="submit"] {
+  padding: var(--sp-3) var(--sp-5);
+  background-color: var(--verde);
+  color: var(--blanco);
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: background-color var(--transicion);
+}
+
+main form button[type="submit"]:hover {
+  background-color: var(--verde-oscuro);
+}
+
+
+/* ==========================================================================
+   10. DETALLE DE PRODUCTO   (detalle-*.html)
+   ========================================================================== */
+
+/* El article solo apila la tarjeta principal y las secciones de abajo */
+.detalle-producto {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-5);
+}
+
+/* Tarjeta unica: imagen + datos + botones */
+.detalle-principal {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: var(--sp-5) var(--sp-6);
+  align-items: start;
+  padding: var(--sp-5);
+  background-color: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+}
+
+/* --- Portada del libro (dentro de la tarjeta) --- */
+
+.detalle-principal > figure {
+  display: flex;
+  justify-content: center;
+}
+
+.detalle-principal > figure img {
+  width: 100%;
+  max-width: 260px;
+  border-radius: var(--radio);
+  background-color: var(--crema-oscuro);
+}
+
+/* --- Informacion principal + acciones de compra --- */
+
+.informacion_principal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.info_libro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.info_libro h2 {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  line-height: 1.2;
+}
+
+.info_libro .autor {
+  color: var(--verde);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+
+.info_libro .edicion {
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+}
+
+.info_libro .edicion .fecha {
+  color: var(--texto);
+  font-weight: 600;
+}
+
+.info_libro .formato {
+  margin-top: var(--sp-2);
+  color: var(--texto-suave);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.info_libro .paginas,
+.info_libro .isbn,
+.info_libro .disponibilidad,
+.info_libro .envio {
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+}
+
+.info_libro .genero {
+  color: var(--verde);
+  font-size: var(--fs-sm);
+}
+
+.info_libro .precio {
+  margin-top: var(--sp-2);
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+  font-weight: 700;
+}
+
+/* --- Botones: Comprar / Agregar al carrito --- */
+
+.interaccion_comprar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+.btn-comprar,
+.btn-carrito {
+  flex: 1 1 auto;
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color var(--transicion), color var(--transicion);
+}
+
+.btn-comprar {
+  background-color: var(--verde);
+  color: var(--blanco);
+}
+
+.btn-comprar:hover {
+  background-color: var(--verde-oscuro);
+}
+
+.btn-carrito {
+  background-color: transparent;
+  border: 1px solid var(--verde);
+  color: var(--verde);
+}
+
+.btn-carrito:hover {
+  background-color: var(--verde);
+  color: var(--blanco);
+}
+
+/* --- Secciones que ocupan todo el ancho --- */
+
+.descripcion,
+.detalles_libro,
+.calificaciones_comentarios {
+  grid-column: 1 / -1;
+  padding: var(--sp-5);
+  background-color: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+}
+
+.descripcion h3,
+.detalles_libro h3,
+.calificaciones_comentarios > h3 {
+  margin-bottom: var(--sp-4);
+  padding-bottom: var(--sp-2);
+  border-bottom: 2px solid var(--verde);
+  font-size: var(--fs-lg);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.descripcion p {
+  max-width: 80ch;
+  line-height: var(--lh);
+}
+
+/* --- Informacion adicional (lista de definiciones) --- */
+
+.detalles_libro dl {
+  columns: 2;
+  column-gap: var(--sp-6);
+}
+
+.detalles_libro dt {
+  margin-bottom: var(--sp-1);
+  color: var(--verde);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  break-after: avoid-column;
+}
+
+.detalles_libro dd {
+  margin-bottom: var(--sp-4);
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+  break-before: avoid-column;
+}
+
+/* --- Calificaciones y opiniones --- */
+
+.calificaciones_comentarios {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.calificaciones_comentarios > h3 {
+  margin-bottom: 0;
+}
+
+.resumen_valoraciones,
+.listado_comentarios,
+.form_comentario {
+  padding: var(--sp-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.resumen_valoraciones h4,
+.listado_comentarios h4,
+.form_comentario h4 {
+  margin-bottom: var(--sp-3);
+  color: var(--verde);
+  font-size: var(--fs-base);
+}
+
+.resumen_valoraciones p,
+.listado_comentarios p {
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+}
+
+.form_comentario > div {
+  margin-bottom: var(--sp-4);
+}
+
+/* --- Estrellas de valoracion --- */
+
+.calif_estrellas > p {
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.estrellas_rating {
+  position: relative;
+  display: inline-flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: var(--sp-1);
+}
+
+.estrellas_rating input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.estrellas_rating label {
+  display: inline-block;
+  margin: 0;
+  color: var(--borde);
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color var(--transicion), transform var(--transicion);
+}
+
+.estrellas_rating label:hover,
+.estrellas_rating label:hover ~ label,
+.estrellas_rating input:checked ~ label {
+  color: var(--verde);
+}
+
+.estrellas_rating label:hover {
+  transform: scale(1.1);
+}
+
+.estrellas_rating input:focus-visible + label {
+  outline: 2px solid var(--verde);
+  outline-offset: 2px;
+  border-radius: var(--radio-sm);
+}
+
+/* --- Enlace para volver --- */
+
+.detalle-producto .volver {
+  grid-column: 1 / -1;
+  justify-self: start;
+  color: var(--verde);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.detalle-producto .volver::before {
+  content: "\2190  ";
+}
+
+.detalle-producto .volver:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+
+/* ==========================================================================
+   11. CARRITO   (carrito.html)
+   ========================================================================== */
+
+.carrito {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 320px);
+  gap: var(--sp-5) var(--sp-6);
+  align-items: start;
+}
+
+.carrito > h2 {
+  grid-column: 1 / -1;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+}
+
+.carrito > p {
+  grid-column: 1 / -1;
+  color: var(--texto-suave);
+}
+
+/* --- Tabla de productos --- */
+
+.productos_carrito {
+  padding: var(--sp-5);
+  background-color: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  overflow-x: auto;
+}
+
+.productos_carrito h3 {
+  margin-bottom: var(--sp-4);
+  font-size: var(--fs-lg);
+}
+
+.productos_carrito table {
+  min-width: 620px;
+}
+
+.productos_carrito th,
+.productos_carrito td {
+  padding: var(--sp-3);
+  border-bottom: 1px solid var(--borde);
+  font-size: var(--fs-sm);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.productos_carrito thead th {
+  border-bottom: 2px solid var(--verde);
+  color: var(--verde);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.productos_carrito tbody tr:hover {
+  background-color: var(--crema-oscuro);
+}
+
+.productos_carrito img {
+  width: 60px;
+  border-radius: var(--radio-sm);
+  background-color: var(--crema-oscuro);
+}
+
+.productos_carrito a {
+  color: var(--verde);
+  font-weight: 600;
+}
+
+.productos_carrito a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.productos_carrito input[type="number"] {
+  width: 72px;
+  padding: var(--sp-2);
+  background-color: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  font-size: var(--fs-sm);
+}
+
+.productos_carrito input[type="number"]:focus {
+  outline: none;
+  border-color: var(--verde);
+  box-shadow: 0 0 0 3px var(--verde-claro);
+}
+
+.btn_eliminar {
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  color: var(--texto-suave);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: border-color var(--transicion), color var(--transicion);
+}
+
+.btn_eliminar:hover {
+  border-color: var(--verde);
+  color: var(--verde);
+}
+
+.acciones_carrito {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--sp-4);
+}
+
+.btn_vaciar {
+  padding: var(--sp-2) var(--sp-4);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: border-color var(--transicion), color var(--transicion);
+}
+
+.btn_vaciar:hover {
+  border-color: var(--verde);
+  color: var(--verde);
+}
+
+/* --- Resumen de la compra --- */
+
+.resumen_compra {
+  position: sticky;
+  top: 90px;
+  padding: var(--sp-5);
+  background-color: var(--crema-oscuro);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+}
+
+.resumen_compra h3 {
+  margin-bottom: var(--sp-4);
+  font-size: var(--fs-lg);
+}
+
+.resumen_compra dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-2) var(--sp-4);
+  margin-bottom: var(--sp-4);
+}
+
+.resumen_compra dt {
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+}
+
+.resumen_compra dd {
+  font-weight: 600;
+  text-align: right;
+}
+
+.resumen_compra dt:last-of-type,
+.resumen_compra dd:last-of-type {
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--borde);
+  color: var(--texto);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+}
+
+.nota_envio {
+  margin-bottom: var(--sp-4);
+  color: var(--texto-suave);
+  font-size: var(--fs-xs);
+}
+
+.btn_comprar {
+  display: block;
+  width: 100%;
+  padding: var(--sp-3) var(--sp-5);
+  background-color: var(--verde);
+  color: var(--blanco);
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-align: center;
+  transition: background-color var(--transicion);
+}
+
+.btn_comprar:hover {
+  background-color: var(--verde-oscuro);
+}
+
+.carrito .seguir_comprando {
+  grid-column: 1 / -1;
+  color: var(--verde);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.carrito .seguir_comprando::before {
+  content: "\2190  ";
+}
+
+.carrito .seguir_comprando:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+
+/* ==========================================================================
+   12. CONTACTO   (contacto.html)
+   ========================================================================== */
+
+.contacto {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--sp-5) var(--sp-6);
+  align-items: start;
+}
+
+.contacto > h2 {
+  grid-column: 1 / -1;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+}
+
+.contacto > p {
+  grid-column: 1 / -1;
+  max-width: 70ch;
+  color: var(--texto-suave);
+}
+
+/* --- Informacion de contacto + redes --- */
+
+.informacion_contacto {
+  padding: var(--sp-5);
+  background-color: var(--crema-oscuro);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+}
+
+.informacion_contacto > h3,
+.formulario_contacto > h2 {
+  margin-bottom: var(--sp-4);
+  font-size: var(--fs-lg);
+}
+
+.informacion_contacto address p {
+  margin-bottom: var(--sp-3);
+  font-size: var(--fs-sm);
+}
+
+.informacion_contacto address a {
+  color: var(--verde);
+  font-weight: 600;
+}
+
+.informacion_contacto address a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.redes_sociales {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--borde);
+}
+
+.redes_sociales h3 {
+  margin-bottom: var(--sp-3);
+  color: var(--verde);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.redes_sociales ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.redes_sociales a {
+  display: inline-block;
+  padding: var(--sp-2) var(--sp-4);
+  border: 1px solid var(--verde);
+  border-radius: 999px;
+  color: var(--verde);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: background-color var(--transicion), color var(--transicion);
+}
+
+.redes_sociales a:hover {
+  background-color: var(--verde);
+  color: var(--blanco);
+}
+
+/* --- Formulario de contacto --- */
+
+.formulario_contacto {
+  padding: var(--sp-5);
+  background-color: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+}
+
+.formulario_contacto form > div {
+  margin-bottom: var(--sp-4);
+}
+
+
+/* ==========================================================================
+   13. CUENTA   (cuenta.html)
+   ========================================================================== */
+
+.cuenta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.cuenta > h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+}
+
+.mensaje_bienvenida {
+  max-width: 70ch;
+  color: var(--texto-suave);
+}
+
+.datos_perfil,
+.historial_compras {
+  padding: var(--sp-5);
+  background-color: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+}
+
+.datos_perfil h3,
+.historial_compras h3,
+.interaccion_usuario h3 {
+  margin-bottom: var(--sp-4);
+  font-size: var(--fs-lg);
+}
+
+.datos_perfil dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--sp-2) var(--sp-5);
+}
+
+.datos_perfil dt {
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.datos_perfil dd {
+  font-weight: 500;
+}
+
+/* --- Historial de compras --- */
+
+.historial_compras {
+  overflow-x: auto;
+}
+
+.historial_compras table {
+  min-width: 720px;
+}
+
+.historial_compras th,
+.historial_compras td {
+  padding: var(--sp-3);
+  border-bottom: 1px solid var(--borde);
+  font-size: var(--fs-sm);
+  text-align: left;
+}
+
+.historial_compras thead th {
+  border-bottom: 2px solid var(--verde);
+  color: var(--verde);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.historial_compras tbody tr:hover {
+  background-color: var(--crema-oscuro);
+}
+
+.historial_compras a {
+  color: var(--verde);
+  font-weight: 600;
+}
+
+.historial_compras a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Acciones de la cuenta --- */
+
+.interaccion_usuario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  padding: var(--sp-5);
+  background-color: var(--crema-oscuro);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+}
+
+.interaccion_usuario h3 {
+  width: 100%;
+}
+
+.interaccion_usuario a,
+.interaccion_usuario button {
+  padding: var(--sp-3) var(--sp-5);
+  background-color: var(--blanco);
+  border: 1px solid var(--verde);
+  border-radius: 999px;
+  color: var(--verde);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: background-color var(--transicion), color var(--transicion);
+}
+
+.interaccion_usuario a:hover,
+.interaccion_usuario button:hover {
+  background-color: var(--verde);
+  color: var(--blanco);
+}
+
+
+/* ==========================================================================
+   14. FINALIZAR COMPRA   (fin-compra.html)
+   ========================================================================== */
+
+.finalizar_compra > h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+}
+
+.finalizar_compra > p {
+  margin-bottom: var(--sp-5);
+  max-width: 70ch;
+  color: var(--texto-suave);
+}
+
+.finalizar_compra > form {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--sp-5);
+  align-items: start;
+}
+
+.datos_envio,
+.metodo_pago,
+.resumen_pedido {
+  padding: var(--sp-5);
+  background-color: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+}
+
+.datos_envio {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.metodo_pago {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.resumen_pedido {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  overflow-x: auto;
+  background-color: var(--crema-oscuro);
+}
+
+.datos_envio h3,
+.metodo_pago h3,
+.resumen_pedido h3 {
+  margin-bottom: var(--sp-4);
+  padding-bottom: var(--sp-2);
+  border-bottom: 2px solid var(--verde);
+  font-size: var(--fs-lg);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.metodo_pago h4 {
+  margin: var(--sp-5) 0 var(--sp-4);
+  color: var(--verde);
+  font-size: var(--fs-base);
+}
+
+.datos_envio > div,
+.metodo_pago > div {
+  margin-bottom: var(--sp-4);
+}
+
+/* --- Resumen del pedido --- */
+
+.resumen_pedido table {
+  min-width: 360px;
+  margin-bottom: var(--sp-4);
+}
+
+.resumen_pedido th,
+.resumen_pedido td {
+  padding: var(--sp-2);
+  border-bottom: 1px solid var(--borde);
+  font-size: var(--fs-sm);
+  text-align: left;
+}
+
+.resumen_pedido thead th {
+  border-bottom: 2px solid var(--verde);
+  color: var(--verde);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.resumen_pedido a {
+  color: var(--verde);
+  font-weight: 600;
+}
+
+.resumen_pedido a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.totales_pedido {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-2) var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--borde);
+}
+
+.totales_pedido dt {
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+}
+
+.totales_pedido dd {
+  font-weight: 600;
+  text-align: right;
+}
+
+.totales_pedido dt:last-of-type,
+.totales_pedido dd:last-of-type {
+  padding-top: var(--sp-2);
+  color: var(--texto);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+}
+
+/* --- Acciones finales --- */
+
+.acciones_compra {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-5);
+  background-color: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+}
+
+.acciones_compra a {
+  padding: var(--sp-2) var(--sp-3);
+  color: var(--verde);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.acciones_compra a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+
+/* ==========================================================================
+   15. RESPONSIVE DE LAS PAGINAS INTERNAS
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .contacto {
+    grid-template-columns: 1fr;
+  }
+
+  .carrito {
+    grid-template-columns: 1fr;
+  }
+
+  .resumen_compra {
+    position: static;
+  }
+
+  .finalizar_compra > form {
+    grid-template-columns: 1fr;
+  }
+
+  .datos_envio,
+  .metodo_pago,
+  .resumen_pedido,
+  .acciones_compra {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .detalle-principal {
+    grid-template-columns: 1fr;
+  }
+
+  .detalle-principal > figure {
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  .detalles_libro dl {
+    columns: 1;
+  }
+
+  .datos_perfil dl {
+    grid-template-columns: 1fr;
+    gap: var(--sp-1);
+  }
+
+  .datos_perfil dt {
+    margin-top: var(--sp-2);
+  }
+}
+
+@media (max-width: 520px) {
+  .btn-comprar,
+  .btn-carrito {
+    flex: 1 1 100%;
+  }
+
+  .interaccion_comprar,
+  .acciones_compra {
+    gap: var(--sp-2);
+  }
+
+  .detalle-principal > figure {
+    max-width: 100%;
+  }
+
+  .productos_carrito,
+  .historial_compras,
+  .resumen_pedido,
+  .datos_envio,
+  .metodo_pago,
+  .informacion_contacto,
+  .formulario_contacto,
+  .datos_perfil,
+  .descripcion,
+  .detalles_libro,
+  .calificaciones_comentarios {
+    padding: var(--sp-4);
   }
 }
