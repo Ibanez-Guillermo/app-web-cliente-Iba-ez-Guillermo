@@ -11,3 +11,4 @@ Predicciones:
 10. Actualizacion: Actualizare Información de contacto y nombre de usuario. Tambien las redes sociales
 11. Creare un archivo Css para maquetar el index html y el header y footer de todas las paginas así tambien como nav.
 12. Aplicaré reglas CSS a las paginas del detalle de producto, y actualizaré el codigo HTML del catalogo y modificaré las reglas CSS del index html.
+13. Voy a crear las reglas CSS para las paginas restantes separandola en comentarios y reutilizando las variables y formateando las paginas.
