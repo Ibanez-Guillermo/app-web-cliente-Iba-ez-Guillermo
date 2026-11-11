@@ -373,18 +373,35 @@ main {
 
 #catalogo_productos article {
   display: flex;
-  flex-direction: column;
-  gap: var(--sp-1);
-  padding: var(--sp-4);
   background-color: var(--blanco);
   border: 1px solid var(--borde);
   border-radius: var(--radio-lg);
+  overflow: hidden;
   transition: border-color var(--transicion), transform var(--transicion);
 }
 
 #catalogo_productos article:hover {
   transform: translateY(-3px);
   border-color: var(--verde);
+}
+
+/* El enlace ocupa toda la tarjeta: cualquier click abre el detalle */
+#catalogo_productos .tarjeta {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-4);
+  border-radius: inherit;
+}
+
+#catalogo_productos .tarjeta:focus-visible {
+  outline: 3px solid var(--verde);
+  outline-offset: -3px;
+}
+
+#catalogo_productos .tarjeta:hover h3 {
+  color: var(--verde);
 }
 
 #catalogo_productos img {
@@ -397,18 +414,11 @@ main {
 #catalogo_productos h3 {
   font-size: var(--fs-base);
   line-height: 1.35;
-}
-
-#catalogo_productos h3 a {
   transition: color var(--transicion);
 }
 
-#catalogo_productos h3 a:hover {
-  color: var(--verde);
-}
-
-/* Formato: primer parrafo del article */
-#catalogo_productos article > p:first-of-type {
+/* Formato: primer parrafo de la tarjeta */
+#catalogo_productos .tarjeta > p:first-of-type {
   color: var(--texto-suave);
   font-size: var(--fs-xs);
   text-transform: uppercase;
@@ -426,30 +436,11 @@ main {
 }
 
 /* Precio: ultimo parrafo, se pega al fondo de la tarjeta */
-#catalogo_productos article > p:last-of-type {
+#catalogo_productos .tarjeta > p:last-of-type {
   margin-top: auto;
   padding-top: var(--sp-2);
   font-size: var(--fs-lg);
   font-weight: 700;
-}
-
-#catalogo_productos article > a:last-child {
-  margin-top: var(--sp-3);
-}
-
-#catalogo_productos button {
-  width: 100%;
-  padding: var(--sp-3);
-  background-color: var(--verde);
-  color: var(--blanco);
-  border-radius: var(--radio);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  transition: background-color var(--transicion);
-}
-
-#catalogo_productos button:hover {
-  background-color: var(--verde-oscuro);
 }
 
 
@@ -503,7 +494,7 @@ main {
     grid-template-columns: 1fr 1fr;
   }
 
-  #catalogo_productos article {
+  #catalogo_productos .tarjeta {
     padding: var(--sp-3);
   }
 }
