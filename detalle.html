@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El principito (ed. de lujo) - Biblionet</title>
+  <title>Detalle del libro - Biblionet</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -28,28 +28,32 @@
   </header>
 
   <main>
-    <article class="detalle-producto">
+    <article class="detalle-producto" id="detalle_libro">
       <div class="detalle-principal">
         <figure>
-          <img src="https://granicaeditor.com/tapas/9789563162806.jpg" alt="Tapa del libro El principito (ed. de lujo)"
-            width="200" height="300">
+          <img id="detalle_imagen"
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='100%25' height='100%25' fill='%23f1ebdf'/%3E%3C/svg%3E"
+            alt="Cargando portada" width="200" height="300">
         </figure>
 
         <div class="informacion_principal">
           <div class="info_libro">
-            <h2>El principito (ed. de lujo)</h2>
-            <p class="autor">Antoine de Saint-Exupéry</p>
-            <p class="edicion"> <span class="fecha">2016 </span> - Granica </p>
-            <p class="formato">Físico</p>
-            <p class="paginas"></p>
-            <p class="genero">#Fábula #Clásico #LiteraturaInfantil</p>
-            <p class="precio">$32100.00</p>
-            <p class="isbn">ISBN: 9786319112252</p>
-            <p class="disponibilidad">Disponibilidad: 8 U</p>
-            <p class="envio">Envío: $4000</p>
+            <h2 id="detalle_titulo">Cargando...</h2>
+            <p class="autor" id="detalle_autor"></p>
+            <p class="edicion">
+              <span class="fecha" id="detalle_anio"></span> -
+              <span id="detalle_editorial"></span>
+            </p>
+            <p class="formato" id="detalle_formato"></p>
+            <p class="paginas" id="detalle_paginas"></p>
+            <p class="genero" id="detalle_genero"></p>
+            <p class="precio" id="detalle_precio"></p>
+            <p class="isbn" id="detalle_isbn"></p>
+            <p class="disponibilidad" id="detalle_disponibilidad"></p>
+            <p class="envio" id="detalle_envio"></p>
           </div>
           <div class="interaccion_comprar">
-            <a href="fin-compra.html" class="btn-comprar">Comprar</a>
+            <a href="fin-compra.html" class="btn-comprar" id="detalle_comprar">Comprar</a>
             <button type="button" class="btn-carrito">Agregar al carrito</button>
           </div>
         </div>
@@ -57,38 +61,30 @@
 
       <section class="descripcion">
         <h3>Descripción</h3>
-        <p>
-          Un aviador que cae en el desierto del Sahara conoce a un pequeño príncipe que viene
-          de otro planeta. A través de su conversación, Saint-Exupéry reflexiona sobre el amor,
-          la amistad, la soledad y las cosas verdaderamente importantes de la vida. Esta edición
-          de lujo incluye las ilustraciones originales del autor en una presentación cuidada
-          para regalar o coleccionar.
-        </p>
+        <p id="detalle_descripcion"></p>
       </section>
 
       <section class="detalles_libro">
         <h3>Informacion Adicional</h3>
         <dl>
           <dt>Formato</dt>
-          <dd>Físico</dd>
+          <dd id="detalle_dl_formato"></dd>
           <dt>Edición</dt>
-          <dd>Edición de lujo</dd>
+          <dd id="detalle_dl_edicion"></dd>
           <dt>Tapa del libro</dt>
-          <dd>Dura</dd>
+          <dd id="detalle_dl_tapa"></dd>
           <dt>Dimensiones</dt>
-          <dd>Altura: No especificado</dd>
-          <dd>Ancho: No especificado</dd>
-          <dd>Peso: No especificado</dd>
+          <dd id="detalle_dl_dimensiones"></dd>
           <dt>Idioma</dt>
-          <dd>Español</dd>
+          <dd id="detalle_dl_idioma"></dd>
           <dt>editorial</dt>
-          <dd>Grupo artemisa</dd>
-          <dt>año de publicación</dt>
-          <dd>No especificado</dd>
+          <dd id="detalle_dl_editorial"></dd>
+          <dt>Año de edición</dt>
+          <dd id="detalle_dl_anio"></dd>
           <dt>Numero de paginas</dt>
-          <dd>No especificado</dd>
+          <dd id="detalle_dl_paginas"></dd>
           <dt>Clasificación</dt>
-          <dd>Apto para todo publico</dd>
+          <dd id="detalle_dl_clasificacion"></dd>
         </dl>
       </section>
 
@@ -150,6 +146,7 @@
     <p>&copy; 2026 E-Commerce - Proyecto Universitario</p>
   </footer>
 
+  <script src="biblionet.js" defer></script>
 </body>
 
 </html>
