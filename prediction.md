@@ -13,3 +13,4 @@ Predicciones:
 12. Aplicaré reglas CSS a las paginas del detalle de producto, y actualizaré el codigo HTML del catalogo y modificaré las reglas CSS del index html.
 13. Voy a crear las reglas CSS para las paginas restantes separandola en comentarios y reutilizando las variables y formateando las paginas.
 14. Voy a migrar los datos de los libros a supabase y conectarlos mediante java script, generando las tarjetas de productos dinamicamente en el DOM.
+15. Voy a crear una sola pagina de detalle de producto que consulte y traiga los datos de supabase usando GET, Async/await y try/catch. Para reemplazar las otras paginas de detalle de producto.
