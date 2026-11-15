@@ -48,42 +48,10 @@
               <th>Acción</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>
-                <img src="https://images.cdn3.buscalibre.com/fit-in/660x660/b3/9c/b39ccc1c05e32ec142a2c2d42300bb29.jpg"
-                  alt="Tapa del libro No me puedes lastimar" width="60" height="90">
-              </td>
-              <td><a href="detalle.html?id=1">No me puedes lastimar</a></td>
-              <td>David Goggins</td>
-              <td>Físico</td>
-              <td>$33000.00</td>
-              <td>
-                <input type="number" value="1" min="1" aria-label="Cantidad de No me puedes lastimar">
-              </td>
-              <td>
-                <button type="button" class="btn_eliminar">Eliminar</button>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf9g4oB2AH-mW3Vk2hDeHKW4NCYKcneBOXgwLeeEKoAM43I-m-ptXk_Wk&s=10"
-                  alt="Tapa del libro El Hobbit" width="60" height="90">
-              </td>
-              <td><a href="detalle.html?id=13">El Hobbit</a></td>
-              <td>J. R. R. Tolkien</td>
-              <td>Físico</td>
-              <td>$45641.00</td>
-              <td>
-                <input type="number" value="1" min="1" aria-label="Cantidad de El Hobbit">
-              </td>
-              <td>
-                <button type="button" class="btn_eliminar">Eliminar</button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
+
+        <p id="carrito_vacio" class="carrito_vacio" hidden>El carrito está vacío.</p>
 
         <div class="acciones_carrito">
           <button type="button" class="btn_vaciar">Vaciar carrito</button>
@@ -96,13 +64,13 @@
 
         <dl>
           <dt>Subtotal</dt>
-          <dd>$78641.00</dd>
+          <dd id="carrito_subtotal">$0.00</dd>
 
           <dt>Costo de envío</dt>
-          <dd>$7000.00</dd>
+          <dd id="carrito_envio">$0.00</dd>
 
           <dt>Total a pagar</dt>
-          <dd>$85641.00</dd>
+          <dd id="carrito_total">$0.00</dd>
         </dl>
 
         <p class="nota_envio">El costo de envío solo aplica a los libros físicos.</p>
@@ -117,6 +85,8 @@
   <footer>
     <p>&copy; 2026 E-Commerce - Proyecto Universitario</p>
   </footer>
+
+  <script src="biblionet.js" defer></script>
 
 </body>
 

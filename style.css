@@ -957,6 +957,13 @@ main form button[type="submit"]:hover {
   text-underline-offset: 3px;
 }
 
+.carrito_vacio {
+  padding: var(--sp-5) 0;
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
 .productos_carrito input[type="number"] {
   width: 72px;
   padding: var(--sp-2);
