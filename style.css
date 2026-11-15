@@ -527,7 +527,8 @@ main {
 .datos_envio input[type="text"],
 .datos_envio textarea,
 .metodo_pago input[type="text"],
-.metodo_pago input[type="password"] {
+.metodo_pago input[type="password"],
+.metodo_pago select {
   width: 100%;
   padding: var(--sp-3);
   background-color: var(--blanco);
@@ -544,7 +545,8 @@ main {
 .datos_envio input[type="text"]:hover,
 .datos_envio textarea:hover,
 .metodo_pago input[type="text"]:hover,
-.metodo_pago input[type="password"]:hover {
+.metodo_pago input[type="password"]:hover,
+.metodo_pago select:hover {
   border-color: var(--verde-claro);
 }
 
@@ -554,7 +556,8 @@ main {
 .formulario_contacto textarea:focus,
 .datos_envio input:focus,
 .datos_envio textarea:focus,
-.metodo_pago input:focus {
+.metodo_pago input:focus,
+.metodo_pago select:focus {
   outline: none;
   border-color: var(--verde);
   box-shadow: 0 0 0 3px var(--verde-claro);
