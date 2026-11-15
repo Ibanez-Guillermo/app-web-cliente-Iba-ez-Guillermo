@@ -214,7 +214,10 @@ function conUnidades(valor, unidad) {
 const SIN_IMAGEN =
   'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'300\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23f1ebdf\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' fill=\'%236c7a71\' font-family=\'sans-serif\' font-size=\'16\'%3ESin imagen%3C/text%3E%3C/svg%3E';
 
+let libroActual = null;
+
 function pintarDetalle(libro) {
+  libroActual = libro;
   document.title = `${dato(libro.titulo)} - Biblionet`;
 
   const imagen = document.querySelector('#detalle_imagen');
@@ -246,6 +249,8 @@ function pintarDetalle(libro) {
   document.querySelector('#detalle_dl_clasificacion').textContent = dato(libro.clasificacion);
 
   document.querySelector('#detalle_comprar').href = `fin-compra.html?id=${libro.id}`;
+
+  actualizarTextoBotonCarrito();
 }
 
 // --- 11. Mensaje cuando el libro no existe --------------------------------
@@ -267,3 +272,253 @@ function mostrarErrorDetalle(mensaje) {
 if (detalleLibro) {
   cargarDetalleLibro();
 }
+
+/* ==========================================================================
+   Carrito
+   ========================================================================== */
+
+// --- 13. localStorage: leer y guardar -------------------------------------
+
+const CLAVE_CARRITO = 'carritobibionet';
+
+function leerCarrito() {
+  try {
+    const guardado = JSON.parse(localStorage.getItem(CLAVE_CARRITO));
+    return Array.isArray(guardado) ? guardado : [];
+  } catch (error) {
+    console.error('No se pudo leer el carrito:', error);
+    return [];
+  }
+}
+
+function guardarCarrito(carrito) {
+  localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
+}
+
+// --- 14. Precios y totales ------------------------------------------------
+
+function numeroDePrecio(valor) {
+  if (valor === null || valor === undefined) return 0;
+
+  const texto = String(valor).trim();
+  if (texto === '' || /no especificado|no aplica/i.test(texto)) return 0;
+
+  // Acepta "$8.964,00" (formato argentino) y "$8964.00" (formato de la base).
+  const limpio = texto.replace(/[^\d.,-]/g, '');
+  if (limpio === '') return 0;
+
+  const numero = limpio.includes(',')
+    ? Number(limpio.replace(/\./g, '').replace(',', '.'))
+    : Number(limpio);
+
+  return Number.isFinite(numero) ? numero : 0;
+}
+
+function formatearMonto(valor) {
+  return `$${Number(valor || 0).toFixed(2)}`;
+}
+
+function esFormatoFisico(formato) {
+  return String(formato || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .includes('fisico');
+}
+
+function calcularTotales(carrito) {
+  let subtotal = 0;
+  let envio = 0;
+
+  carrito.forEach((item) => {
+    const cantidad = Number(item.cantidad) || 1;
+    subtotal += (Number(item.precio) || 0) * cantidad;
+
+    if (esFormatoFisico(item.formato)) {
+      envio += numeroDePrecio(item.envio) * cantidad;
+    }
+  });
+
+  return { subtotal, envio, total: subtotal + envio };
+}
+
+// --- 15. Agregar, actualizar y quitar productos ---------------------------
+
+function agregarAlCarrito(libro) {
+  const carrito = leerCarrito();
+  const existente = carrito.find((item) => String(item.id) === String(libro.id));
+
+  if (existente) {
+    existente.cantidad += 1;
+  } else {
+    carrito.push({
+      id: libro.id,
+      titulo: libro.titulo,
+      autor: libro.autor,
+      formato: libro.formato,
+      precio: Number(libro.precio) || 0,
+      envio: libro.envio,
+      imagen: libro.imagen,
+      cantidad: 1
+    });
+  }
+
+  guardarCarrito(carrito);
+}
+
+function actualizarCantidad(id, cantidad) {
+  const carrito = leerCarrito();
+  const item = carrito.find((producto) => String(producto.id) === String(id));
+
+  if (!item) return;
+
+  item.cantidad = cantidad;
+  guardarCarrito(carrito);
+  pintarCarrito();
+}
+
+function eliminarDelCarrito(id) {
+  const carrito = leerCarrito().filter((item) => String(item.id) !== String(id));
+  guardarCarrito(carrito);
+  pintarCarrito();
+}
+
+function vaciarCarrito() {
+  guardarCarrito([]);
+  pintarCarrito();
+}
+
+// --- 16. Filas de la tabla del carrito ------------------------------------
+
+function crearFilaCarrito(item) {
+  const fila = document.createElement('tr');
+
+  const celdaImagen = document.createElement('td');
+  const imagen = document.createElement('img');
+  imagen.src = item.imagen || SIN_IMAGEN;
+  imagen.alt = `Tapa del libro ${item.titulo || ''}`;
+  imagen.width = 60;
+  imagen.height = 90;
+  celdaImagen.append(imagen);
+
+  const celdaTitulo = document.createElement('td');
+  const enlace = document.createElement('a');
+  enlace.href = `detalle.html?id=${encodeURIComponent(item.id)}`;
+  enlace.textContent = item.titulo || '';
+  celdaTitulo.append(enlace);
+
+  const celdaAutor = document.createElement('td');
+  celdaAutor.textContent = item.autor || '';
+
+  const celdaFormato = document.createElement('td');
+  celdaFormato.textContent = item.formato || '';
+
+  const celdaPrecio = document.createElement('td');
+  celdaPrecio.textContent = formatearMonto(item.precio);
+
+  const celdaCantidad = document.createElement('td');
+  const inputCantidad = document.createElement('input');
+  inputCantidad.type = 'number';
+  inputCantidad.min = '1';
+  inputCantidad.value = item.cantidad;
+  inputCantidad.setAttribute('value', String(item.cantidad));
+  inputCantidad.setAttribute('aria-label', `Cantidad de ${item.titulo || 'libro'}`);
+  inputCantidad.addEventListener('change', () => {
+    let cantidad = parseInt(inputCantidad.value, 10);
+
+    if (!Number.isFinite(cantidad) || cantidad < 1) {
+      cantidad = 1;
+    }
+
+    inputCantidad.value = cantidad;
+    actualizarCantidad(item.id, cantidad);
+  });
+  celdaCantidad.append(inputCantidad);
+
+  const celdaAccion = document.createElement('td');
+  const botonEliminar = document.createElement('button');
+  botonEliminar.type = 'button';
+  botonEliminar.className = 'btn_eliminar';
+  botonEliminar.textContent = 'Eliminar';
+  botonEliminar.addEventListener('click', () => eliminarDelCarrito(item.id));
+  celdaAccion.append(botonEliminar);
+
+  fila.append(
+    celdaImagen,
+    celdaTitulo,
+    celdaAutor,
+    celdaFormato,
+    celdaPrecio,
+    celdaCantidad,
+    celdaAccion
+  );
+
+  return fila;
+}
+
+// --- 17. Pintar el carrito y sus totales ----------------------------------
+
+const tablaCarrito = document.querySelector('.productos_carrito tbody');
+const tablaCarritoCompleta = document.querySelector('.productos_carrito table');
+const mensajeCarritoVacio = document.querySelector('#carrito_vacio');
+const subtotalCarrito = document.querySelector('#carrito_subtotal');
+const envioCarrito = document.querySelector('#carrito_envio');
+const totalCarrito = document.querySelector('#carrito_total');
+const botonVaciar = document.querySelector('.btn_vaciar');
+
+function pintarCarrito() {
+  const carrito = leerCarrito();
+
+  tablaCarrito.replaceChildren();
+  carrito.forEach((item) => tablaCarrito.append(crearFilaCarrito(item)));
+
+  const vacio = carrito.length === 0;
+  tablaCarritoCompleta.hidden = vacio;
+  mensajeCarritoVacio.hidden = !vacio;
+
+  const totales = calcularTotales(carrito);
+  subtotalCarrito.textContent = formatearMonto(totales.subtotal);
+  envioCarrito.textContent = formatearMonto(totales.envio);
+  totalCarrito.textContent = formatearMonto(totales.total);
+}
+
+// --- 18. Botón "Agregar al carrito" del detalle ---------------------------
+
+function cantidadEnCarrito(id) {
+  const item = leerCarrito().find((producto) => String(producto.id) === String(id));
+  return item ? Number(item.cantidad) || 1 : 0;
+}
+
+function textoBotonAgregado(cantidad) {
+  if (cantidad <= 0) return 'Agregar al carrito';
+  return cantidad === 1 ? 'Agregado' : `Agregado (${cantidad})`;
+}
+
+function actualizarTextoBotonCarrito() {
+  if (!botonAgregarCarrito || !libroActual) return;
+
+  botonAgregarCarrito.textContent = textoBotonAgregado(cantidadEnCarrito(libroActual.id));
+}
+
+const botonAgregarCarrito = document.querySelector('.btn-carrito');
+
+if (botonAgregarCarrito) {
+  botonAgregarCarrito.addEventListener('click', () => {
+    if (!libroActual) return;
+
+    agregarAlCarrito(libroActual);
+    actualizarTextoBotonCarrito();
+  });
+}
+
+// --- 19. Arranque: solo si esta página es el carrito ----------------------
+
+if (tablaCarrito) {
+  botonVaciar.addEventListener('click', vaciarCarrito);
+  pintarCarrito();
+}
+
+/* ==========================================================================
+   Carrito ------------------------------------------------------------------
+   --------....-n
+   ========================================================================== */
