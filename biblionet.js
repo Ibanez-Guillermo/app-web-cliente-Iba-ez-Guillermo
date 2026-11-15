@@ -522,3 +522,475 @@ if (tablaCarrito) {
    Carrito ------------------------------------------------------------------
    --------....-n
    ========================================================================== */
+
+/* ==========================================================================
+   FINALIZAR COMPRA (fin-compra.html)
+   --------------------------------------------------------------------------
+   Resumen del pedido desde el carrito (localStorage) o desde ?id=, y registro
+   de la compra en la tabla "compras" de Supabase.
+   ========================================================================== */
+
+// --- 20. Referencias al DOM de fin-compra.html ----------------------------
+
+const ID_CUENTA = 'Fulano_213';
+
+const seccionFinCompra = document.querySelector('.finalizar_compra');
+const tablaResumenPedido = document.querySelector('.resumen_pedido table tbody');
+const formFinCompra = document.querySelector('.finalizar_compra form');
+const botonConfirmarCompra = document.querySelector('.finalizar_compra form button[type="submit"]');
+const pedidoSubtotal = document.querySelector('#pedido_subtotal');
+const pedidoEnvio = document.querySelector('#pedido_envio');
+const pedidoTotal = document.querySelector('#pedido_total');
+
+const inputMetodoPago = document.querySelector('#metodo_pago');
+const camposTarjeta = document.querySelectorAll('.metodo_pago .campo_tarjeta');
+const inputNumeroTarjeta = document.querySelector('#numero_tarjeta');
+const inputVencimiento = document.querySelector('#vencimiento');
+const inputCvc = document.querySelector('#cvc');
+const avisoMetodoPago = document.querySelector('#aviso_metodo_pago');
+const camposMercadoPago = document.querySelectorAll('.metodo_pago .campo_mercado_pago');
+const botonCopiarAlias = document.querySelector('#btn_copiar_alias');
+const checkConfirmoTransferencia = document.querySelector('#confirmo_transferencia');
+
+const ALIAS_BIBLIONET = 'BIBLIONET.PAGOS';
+
+let temporizadorAlias;
+
+let itemsPedido = [];
+
+// --- 21. Armar el pedido: libro puntual o carrito -------------------------
+
+async function cargarItemsPedido() {
+  const id = new URLSearchParams(window.location.search).get('id');
+
+  if (!id) {
+    return leerCarrito().map((item) => ({
+      ...item,
+      cantidad: Number(item.cantidad) || 1
+    }));
+  }
+
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/libros?id=eq.${encodeURIComponent(id)}&select=*`,
+    { headers: SUPABASE_HEADERS }
+  );
+
+  if (!res.ok) {
+    throw new Error(`Error ${res.status}: ${res.statusText}`);
+  }
+
+  const libros = await res.json();
+
+  if (libros.length === 0) return [];
+
+  return [{ ...libros[0], cantidad: 1 }];
+}
+
+// --- 22. Filas del resumen del pedido -------------------------------------
+
+function crearFilaResumen(item) {
+  const cantidad = Number(item.cantidad) || 1;
+  const titulo = item.titulo || '';
+
+  const fila = document.createElement('tr');
+
+  const celdaTitulo = document.createElement('td');
+  const enlace = document.createElement('a');
+  enlace.href = `detalle.html?id=${encodeURIComponent(item.id)}`;
+  enlace.textContent = cantidad > 1 ? `${titulo} (x${cantidad})` : titulo;
+  celdaTitulo.append(enlace);
+
+  const celdaAutor = document.createElement('td');
+  celdaAutor.textContent = item.autor || '';
+
+  const celdaFormato = document.createElement('td');
+  celdaFormato.textContent = item.formato || '';
+
+  const celdaPrecio = document.createElement('td');
+  celdaPrecio.textContent = formatearMonto((Number(item.precio) || 0) * cantidad);
+
+  fila.append(celdaTitulo, celdaAutor, celdaFormato, celdaPrecio);
+
+  return fila;
+}
+
+// --- 23. Pintar resumen, totales y estado del botón -----------------------
+
+function mostrarAvisoPedido(texto) {
+  let aviso = document.querySelector('#pedido_aviso');
+
+  if (!aviso) {
+    aviso = document.createElement('p');
+    aviso.id = 'pedido_aviso';
+    aviso.className = 'carrito_vacio';
+    aviso.setAttribute('role', 'alert');
+    seccionFinCompra.querySelector('.resumen_pedido').append(aviso);
+  }
+
+  aviso.textContent = texto;
+}
+
+function pintarResumenPedido(items, mensajeVacio) {
+  tablaResumenPedido.replaceChildren();
+  items.forEach((item) => tablaResumenPedido.append(crearFilaResumen(item)));
+
+  const totales = calcularTotales(items);
+  pedidoSubtotal.textContent = formatearMonto(totales.subtotal);
+  pedidoEnvio.textContent = formatearMonto(totales.envio);
+  pedidoTotal.textContent = formatearMonto(totales.total);
+
+  if (items.length === 0) {
+    const fila = document.createElement('tr');
+    const celda = document.createElement('td');
+    celda.colSpan = 4;
+    celda.textContent = mensajeVacio || 'No hay productos seleccionados para comprar.';
+    fila.append(celda);
+    tablaResumenPedido.append(fila);
+
+    botonConfirmarCompra.disabled = true;
+  } else {
+    botonConfirmarCompra.disabled = false;
+  }
+}
+
+async function iniciarFinCompra() {
+  let mensajeVacio;
+
+  try {
+    itemsPedido = await cargarItemsPedido();
+  } catch (error) {
+    console.error('No se pudo preparar el resumen del pedido:', error);
+    itemsPedido = [];
+    mensajeVacio = 'No se pudo cargar el libro. Intentá de nuevo más tarde.';
+  }
+
+  pintarResumenPedido(itemsPedido, mensajeVacio);
+}
+
+// --- 24. Datos de la compra: fecha y método de pago -----------------------
+
+function fechaDeHoy() {
+  const hoy = new Date();
+  const dia = String(hoy.getDate()).padStart(2, '0');
+  const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+
+  return `${dia}/${mes}/${hoy.getFullYear()}`;
+}
+
+function metodoPagoSanitizado() {
+  const inputMetodo = document.querySelector('#metodo_pago');
+  const inputNumero = document.querySelector('#numero_tarjeta');
+
+  const metodo = inputMetodo ? inputMetodo.value.trim() : '';
+  const digitos = inputNumero ? inputNumero.value.replace(/\D/g, '') : '';
+
+  if (/tarjeta/i.test(metodo) && digitos.length >= 4) {
+    return `${metodo} **** ${digitos.slice(-4)}`;
+  }
+
+  return metodo;
+}
+
+function armarRegistrosCompra(items) {
+  const metodoPago = metodoPagoSanitizado();
+  const fecha = fechaDeHoy();
+  const pagoConMercadoPago = normalizarTexto(inputMetodoPago.value).includes('mercado pago');
+
+  return items.map((item) => {
+    const cantidad = Number(item.cantidad) || 1;
+    const fisico = esFormatoFisico(item.formato);
+
+    let estadoEnvio = 'No aplica';
+
+    if (fisico) {
+      estadoEnvio = pagoConMercadoPago ? 'Pendiente de acreditación' : 'Preparando envío';
+    }
+
+    return {
+      id_account: ID_CUENTA,
+      libro_id: Number(item.id),
+      titulo: cantidad > 1 ? `${item.titulo} (x${cantidad})` : item.titulo,
+      formato: item.formato || 'No especificado',
+      fecha: fecha,
+      precio: (Number(item.precio) || 0) * cantidad,
+      envio: fisico ? numeroDePrecio(item.envio) * cantidad : 0,
+      estado_envio: estadoEnvio,
+      metodo_pago: metodoPago
+    };
+  });
+}
+
+// --- 25. Método de pago dinámico ------------------------------------------
+
+function normalizarTexto(valor) {
+  return String(valor || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+}
+
+function limpiarCamposTarjeta() {
+  [inputNumeroTarjeta, inputVencimiento, inputCvc].forEach((input) => {
+    if (input) input.value = '';
+  });
+}
+
+function aplicarMetodoPago() {
+  const metodo = normalizarTexto(inputMetodoPago.value);
+  const esTarjeta = metodo.startsWith('tarjeta');
+  const esMercadoPago = metodo.includes('mercado pago');
+
+  // Los datos de la tarjeta solo se muestran y se exigen si el pago es con tarjeta.
+  camposTarjeta.forEach((campo) => {
+    campo.hidden = !esTarjeta;
+  });
+
+  [inputNumeroTarjeta, inputVencimiento, inputCvc].forEach((input) => {
+    if (input) input.required = esTarjeta;
+  });
+
+  // Los datos de transferencia y su confirmación solo aplican a Mercado Pago.
+  camposMercadoPago.forEach((campo) => {
+    campo.hidden = !esMercadoPago;
+  });
+
+  if (checkConfirmoTransferencia) {
+    checkConfirmoTransferencia.required = esMercadoPago;
+
+    if (!esMercadoPago) {
+      checkConfirmoTransferencia.checked = false;
+    }
+  }
+
+  if (!esTarjeta) {
+    limpiarCamposTarjeta();
+  }
+
+  avisoMetodoPago.textContent =
+    'Al confirmar la compra se generará el comprobante o enlace de pago correspondiente.';
+  avisoMetodoPago.hidden = esTarjeta;
+}
+
+// --- 26. Copiar el alias de Mercado Pago ---------------------------------
+
+function copiarAliasConSeleccionTemporal(texto) {
+  const area = document.createElement('textarea');
+  area.value = texto;
+  area.setAttribute('readonly', '');
+  area.setAttribute('aria-hidden', 'true');
+  area.style.position = 'fixed';
+  area.style.top = '-1000px';
+  document.body.append(area);
+  area.select();
+
+  let copiado = false;
+
+  try {
+    copiado = document.execCommand('copy');
+  } catch (error) {
+    console.error('No se pudo copiar el alias:', error);
+  }
+
+  area.remove();
+
+  return copiado;
+}
+
+function mostrarAliasCopiado() {
+  clearTimeout(temporizadorAlias);
+  botonCopiarAlias.textContent = '¡Alias copiado!';
+
+  temporizadorAlias = setTimeout(() => {
+    botonCopiarAlias.textContent = 'Copiar alias';
+  }, 2000);
+}
+
+async function copiarAlias() {
+  let copiado = false;
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(ALIAS_BIBLIONET);
+      copiado = true;
+    } else {
+      copiado = copiarAliasConSeleccionTemporal(ALIAS_BIBLIONET);
+    }
+  } catch (error) {
+    console.error('No se pudo copiar el alias:', error);
+    copiado = copiarAliasConSeleccionTemporal(ALIAS_BIBLIONET);
+  }
+
+  if (copiado) {
+    mostrarAliasCopiado();
+  }
+}
+
+// --- 27. Confirmar la compra e insertarla en Supabase --------------------
+
+function mostrarCompraExitosa() {
+  const accionesCompra = seccionFinCompra.querySelector('.acciones_compra');
+  let mensaje = document.querySelector('#compra_exitosa');
+
+  if (!mensaje) {
+    mensaje = document.createElement('p');
+    mensaje.id = 'compra_exitosa';
+    mensaje.className = 'nota_envio';
+    mensaje.setAttribute('role', 'status');
+    accionesCompra.append(mensaje);
+  }
+
+  mensaje.textContent =
+    '¡Compra registrada con éxito! Te redirigimos a tu cuenta en unos segundos.';
+}
+
+async function confirmarCompra(evento) {
+  evento.preventDefault();
+
+  if (itemsPedido.length === 0) return;
+
+  const vinoDelCarrito = !new URLSearchParams(window.location.search).get('id');
+  const registros = armarRegistrosCompra(itemsPedido);
+
+  botonConfirmarCompra.disabled = true;
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/compras`, {
+      method: 'POST',
+      headers: SUPABASE_HEADERS,
+      body: JSON.stringify(registros)
+    });
+
+    if (!res.ok) {
+      throw new Error(`Error ${res.status}: ${res.statusText}`);
+    }
+
+    if (vinoDelCarrito) {
+      guardarCarrito([]);
+    }
+
+    mostrarCompraExitosa();
+
+    setTimeout(() => {
+      window.location.href = 'cuenta.html';
+    }, 2000);
+  } catch (error) {
+    console.error('No se pudo registrar la compra:', error);
+    botonConfirmarCompra.disabled = false;
+    mostrarAvisoPedido('No se pudo registrar la compra. Intentá de nuevo más tarde.');
+  }
+}
+
+// --- 28. Arranque: solo si esta página es fin-compra.html ----------------
+
+if (seccionFinCompra) {
+  inputMetodoPago.addEventListener('change', aplicarMetodoPago);
+  botonCopiarAlias.addEventListener('click', copiarAlias);
+
+  aplicarMetodoPago();
+
+  formFinCompra.addEventListener('submit', confirmarCompra);
+  botonConfirmarCompra.disabled = true;
+  iniciarFinCompra();
+}
+
+/* ==========================================================================
+   HISTORIAL DE COMPRAS (cuenta.html)
+   --------------------------------------------------------------------------
+   Lee las compras del usuario desde la tabla "compras" de Supabase.
+   ========================================================================== */
+
+// --- 29. Referencia al DOM y filas del historial -------------------------
+
+const tablaHistorialCompras = document.querySelector('.historial_compras tbody');
+
+function crearFilaHistorial(compra) {
+  const fila = document.createElement('tr');
+
+  const celdaTitulo = document.createElement('td');
+  const enlace = document.createElement('a');
+  enlace.href = `detalle.html?id=${encodeURIComponent(compra.libro_id)}`;
+  enlace.textContent = compra.titulo || '';
+  celdaTitulo.append(enlace);
+
+  const celdaFormato = document.createElement('td');
+  celdaFormato.textContent = compra.formato || '';
+
+  const celdaFecha = document.createElement('td');
+  celdaFecha.textContent = compra.fecha || '';
+
+  const celdaPrecio = document.createElement('td');
+  celdaPrecio.textContent = formatearMonto(compra.precio);
+
+  const celdaEnvio = document.createElement('td');
+  celdaEnvio.textContent = Number(compra.envio) === 0 ? 'No aplica' : formatearMonto(compra.envio);
+
+  const celdaEstado = document.createElement('td');
+  celdaEstado.textContent = compra.estado_envio || '';
+
+  const celdaMetodo = document.createElement('td');
+  celdaMetodo.textContent = compra.metodo_pago || '';
+
+  fila.append(
+    celdaTitulo,
+    celdaFormato,
+    celdaFecha,
+    celdaPrecio,
+    celdaEnvio,
+    celdaEstado,
+    celdaMetodo
+  );
+
+  return fila;
+}
+
+// --- 30. Pintar el historial o su mensaje --------------------------------
+
+function pintarMensajeHistorial(texto) {
+  const fila = document.createElement('tr');
+  const celda = document.createElement('td');
+  celda.colSpan = 7;
+  celda.textContent = texto;
+  fila.append(celda);
+
+  tablaHistorialCompras.replaceChildren(fila);
+}
+
+function pintarHistorialCompras(compras) {
+  if (compras.length === 0) {
+    pintarMensajeHistorial('Todavía no realizaste compras.');
+    return;
+  }
+
+  const fragmento = document.createDocumentFragment();
+  compras.forEach((compra) => fragmento.append(crearFilaHistorial(compra)));
+
+  tablaHistorialCompras.replaceChildren(fragmento);
+}
+
+// --- 31. Traer las compras desde Supabase --------------------------------
+
+async function cargarHistorialCompras() {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/compras?id_account=eq.${ID_CUENTA}&order=id.desc`,
+      { headers: SUPABASE_HEADERS }
+    );
+
+    if (!res.ok) {
+      throw new Error(`Error ${res.status}: ${res.statusText}`);
+    }
+
+    const compras = await res.json();
+    pintarHistorialCompras(compras);
+  } catch (error) {
+    console.error('No se pudo cargar el historial de compras:', error);
+    pintarMensajeHistorial('No se pudo cargar el historial de compras. Intentá de nuevo más tarde.');
+  }
+}
+
+// --- 32. Arranque: solo si esta página es cuenta.html --------------------
+
+if (tablaHistorialCompras) {
+  cargarHistorialCompras();
+}

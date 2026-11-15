@@ -71,32 +71,62 @@
 
           <div>
             <label for="metodo_pago">Tipo de pago:</label>
-            <input type="text" id="metodo_pago" name="metodo_pago" list="opciones_metodo_pago"
-              value="Tarjeta de crédito" required>
-            <datalist id="opciones_metodo_pago">
-              <option value="Tarjeta de débito">
-              <option value="Tarjeta de crédito">
-              <option value="Mercado Pago">
-              <option value="Pago Fácil (efectivo)">
-              <option value="RapiPago (efectivo)">
-            </datalist>
+            <select id="metodo_pago" name="metodo_pago" required>
+              <option value="Tarjeta de crédito" selected>Tarjeta de crédito</option>
+              <option value="Tarjeta de débito">Tarjeta de débito</option>
+              <option value="Mercado Pago">Mercado Pago</option>
+            </select>
           </div>
 
-          <h4>Datos de la tarjeta</h4>
+          <h4 class="campo_tarjeta">Datos de la tarjeta</h4>
 
-          <div>
+          <div class="campo_tarjeta">
             <label for="numero_tarjeta">Número de tarjeta:</label>
             <input type="text" id="numero_tarjeta" name="numero_tarjeta" placeholder="1234 5678 9012 3456" required>
           </div>
 
-          <div>
+          <div class="campo_tarjeta">
             <label for="vencimiento">Vencimiento:</label>
             <input type="text" id="vencimiento" name="vencimiento" placeholder="MM/AA" required>
           </div>
 
-          <div>
+          <div class="campo_tarjeta">
             <label for="cvc">CVC:</label>
             <input type="password" id="cvc" name="cvc" placeholder="***" maxlength="3" required>
+          </div>
+
+          <p id="aviso_metodo_pago" class="nota_envio" hidden></p>
+
+          <div id="datos_mercado_pago" class="datos_perfil campo_mercado_pago" hidden>
+            <h4>Datos de la cuenta de Biblionet</h4>
+
+            <dl>
+              <dt>Nombre del titular</dt>
+              <dd>Biblionet S.A.</dd>
+
+              <dt>Alias</dt>
+              <dd>BIBLIONET.PAGOS</dd>
+
+              <dt>CBU</dt>
+              <dd>0000003100012345678901</dd>
+
+              <dt>CUIT</dt>
+              <dd>30-71234567-8</dd>
+
+              <dt>Tipo de banco</dt>
+              <dd>Cuenta virtual (billetera digital)</dd>
+            </dl>
+          </div>
+
+          <div class="campo_mercado_pago" hidden>
+            <button type="button" id="btn_copiar_alias" class="btn_vaciar">Copiar alias</button>
+          </div>
+
+          <div class="campo_mercado_pago" hidden>
+            <label for="confirmo_transferencia">
+              <input type="checkbox" id="confirmo_transferencia" name="confirmo_transferencia">
+              Confirmo que ya realicé la transferencia o guardé los datos para abonar
+            </label>
           </div>
         </section>
 
@@ -113,32 +143,18 @@
                 <th>Precio</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><a href="detalle.html?id=1">No me puedes lastimar</a></td>
-                <td>David Goggins</td>
-                <td>Físico</td>
-                <td>$33000.00</td>
-              </tr>
-
-              <tr>
-                <td><a href="detalle.html?id=13">El Hobbit</a></td>
-                <td>J. R. R. Tolkien</td>
-                <td>Físico</td>
-                <td>$45641.00</td>
-              </tr>
-            </tbody>
+            <tbody></tbody>
           </table>
 
           <dl class="totales_pedido">
             <dt>Subtotal</dt>
-            <dd>$78641.00</dd>
+            <dd id="pedido_subtotal">$0.00</dd>
 
             <dt>Envío</dt>
-            <dd>$7000.00</dd>
+            <dd id="pedido_envio">$0.00</dd>
 
             <dt>Total a pagar</dt>
-            <dd>$85641.00</dd>
+            <dd id="pedido_total">$0.00</dd>
           </dl>
         </section>
 
@@ -157,6 +173,8 @@
   <footer>
     <p>&copy; 2026 E-Commerce - Proyecto Universitario</p>
   </footer>
+
+  <script src="biblionet.js" defer></script>
 
 </body>
 
