@@ -17,7 +17,6 @@
       </h1>
       <ul>
         <li><a href="index.html">Inicio</a></li>
-        <li><a href="index.html#catalogo_productos">Catalogo</a></li>
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
       <div>
@@ -33,30 +32,13 @@
       <form id="form_filtros">
         <fieldset>
           <legend>Género</legend>
-          <label for="filtro_genero">Buscar por género:</label>
-          <input type="text" id="filtro_genero" name="genero" list="lista_generos"
-            placeholder="Escribí o seleccioná un género...">
-
-          <datalist id="lista_generos">
-            <option value="Aventura">
-            <option value="Autoayuda">
-            <option value="Ciencia Ficción">
-            <option value="Clásico">
-            <option value="Desarrollo Profesional">
-            <option value="Épica">
-            <option value="Esoterismo">
-            <option value="Espiritualidad">
-            <option value="Fábula">
-            <option value="Fantasía">
-            <option value="Ficción">
-            <option value="Filosofía">
-            <option value="Literatura Infantil">
-            <option value="Literatura Juvenil">
-            <option value="Motivación">
-            <option value="Negociación">
-            <option value="Novela Contemporánea">
-            <option value="Psicología">
-          </datalist>
+          <div class="campo_generos">
+            <div id="filtros_generos" class="lista_generos"></div>
+            <select id="selector_genero" class="selector_genero" aria-label="Agregar género">
+              <option value="">Agregar género...</option>
+            </select>
+          </div>
+          <button type="button" id="btn_limpiar_filtros" class="btn_vaciar" hidden>Limpiar filtros</button>
         </fieldset>
       </form>
     </section>

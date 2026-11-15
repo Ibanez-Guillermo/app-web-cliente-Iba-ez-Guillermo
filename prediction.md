@@ -16,3 +16,5 @@ Predicciones:
 15. Voy a crear una sola pagina de detalle de producto que consulte y traiga los datos de supabase usando GET, Async/await y try/catch. Para reemplazar las otras paginas de detalle de producto.
 16. Voy a conectar el carrito a Biblionet.js, actualizar la pagina del carrito y aplicar localstorage para guardar la información del carrito en el equipo del usuario. 
 17. Voy a hacer funcional la pagina "fin-compra.html" conectandola a biblionet.js y cuenta.html para que el historial de la cuenta se actualice si se realiza una nueva compra.
+18. Voy a modificar los filtros para que aparezcan solo los filtros de los libros existente y configurarlos para poder seleccionar multiples opciones.
+19. Voy a agregar a detalle.html un minicatalogo que permita al usuario poder seguir navegando en libros sin necesidad de volver al inicio.

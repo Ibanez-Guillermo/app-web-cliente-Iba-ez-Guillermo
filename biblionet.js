@@ -21,9 +21,12 @@ const SUPABASE_HEADERS = {
 let todosLosLibros = [];
 
 const contenedor = document.querySelector('#catalogo_productos');
-const inputGenero = document.querySelector('#filtro_genero');
+const filtrosGeneros = document.querySelector('#filtros_generos');
+const selectorGenero = document.querySelector('#selector_genero');
+const botonLimpiarFiltros = document.querySelector('#btn_limpiar_filtros');
 const formFiltros = document.querySelector('#form_filtros');
 const detalleLibro = document.querySelector('#detalle_libro');
+const contenedorMiniCatalogo = document.querySelector('#mini_catalogo');
 
 // --- 3. Traer los libros desde Supabase -----------------------------------
 
@@ -39,6 +42,7 @@ async function cargarLibros() {
     }
 
     todosLosLibros = await res.json();
+    iniciarFiltrosGeneros(todosLosLibros);
     pintarCatalogo(todosLosLibros);
   } catch (error) {
     console.error('No se pudieron cargar los libros:', error);
@@ -48,13 +52,13 @@ async function cargarLibros() {
 
 // --- 4. Mensaje dentro del catálogo ---------------------------------------
 
-function pintarMensaje(texto) {
-  contenedor.querySelectorAll('article, .sin_resultados').forEach((el) => el.remove());
+function pintarMensaje(texto, destino = contenedor) {
+  destino.querySelectorAll('article, .sin_resultados').forEach((el) => el.remove());
 
   const mensaje = document.createElement('p');
   mensaje.className = 'sin_resultados';
   mensaje.textContent = texto;
-  contenedor.append(mensaje);
+  destino.append(mensaje);
 }
 
 // --- 5. Armar las tarjetas de cada libro ----------------------------------
@@ -71,15 +75,15 @@ function formatearGeneros(genero) {
     .join(' ');
 }
 
-function pintarCatalogo(libros) {
-  // Borra solo las tarjetas anteriores: el <h2>Catalogo</h2> queda intacto.
-  contenedor.querySelectorAll('article, .sin_resultados').forEach((el) => el.remove());
+function pintarCatalogo(libros, destino = contenedor) {
+  // Borra solo las tarjetas anteriores: el titulo del contenedor queda intacto.
+  destino.querySelectorAll('article, .sin_resultados').forEach((el) => el.remove());
 
   if (libros.length === 0) {
     const mensaje = todosLosLibros.length === 0
       ? 'Todavía no hay libros cargados.'
-      : 'No se encontraron libros para ese género.';
-    pintarMensaje(mensaje);
+      : 'No se encontraron libros para los géneros seleccionados.';
+    pintarMensaje(mensaje, destino);
     return;
   }
 
@@ -115,31 +119,178 @@ function pintarCatalogo(libros) {
 
     enlace.append(imagen, titulo, formato, autor, genero, precio);
     articulo.append(enlace);
-    contenedor.append(articulo);
+    destino.append(articulo);
   });
 }
 
-// --- 6. Filtrar por género ------------------------------------------------
+// --- 6. Filtrar por género (selector múltiple con etiquetas) --------------
+
+let generosDisponibles = [];
+let generosSeleccionados = [];
+
+// Separa palabras unidas en CamelCase: "CienciaFicción" -> "Ciencia Ficción".
+function separarCamelCase(texto) {
+  return texto.replace(/([a-záéíóúñü])([A-ZÁÉÍÓÚÑÜ])/g, '$1 $2');
+}
+
+// Los géneros vienen como "#Autoayuda #Motivación" o "#CienciaFicción, #Aventura".
+function generosDeLibro(libro) {
+  return String(libro.genero || '')
+    .split(/[#,\s]+/)
+    .map((genero) => separarCamelCase(genero.trim()))
+    .filter((genero) => genero !== '');
+}
+
+// Junta los géneros de todos los libros, sin repetir y ordenados alfabéticamente.
+function extraerGeneros(libros) {
+  const unicos = new Map();
+
+  libros.forEach((libro) => {
+    generosDeLibro(libro).forEach((genero) => {
+      const clave = normalizarTexto(genero);
+
+      if (clave !== '' && !unicos.has(clave)) {
+        unicos.set(clave, genero);
+      }
+    });
+  });
+
+  return [...unicos.values()].sort((a, b) => a.localeCompare(b, 'es'));
+}
+
+function crearOpcionGenero(genero) {
+  const opcion = document.createElement('option');
+  opcion.value = genero;
+  opcion.textContent = genero;
+  return opcion;
+}
+
+// Deja en el desplegable solo los géneros que todavía no están elegidos.
+function poblarSelectorGenero() {
+  if (!selectorGenero) return;
+
+  const seleccionados = generosSeleccionados.map(normalizarTexto);
+
+  selectorGenero.replaceChildren();
+
+  const inicial = document.createElement('option');
+  inicial.value = '';
+  inicial.textContent = 'Agregar género...';
+  selectorGenero.append(inicial);
+
+  generosDisponibles.forEach((genero) => {
+    if (!seleccionados.includes(normalizarTexto(genero))) {
+      selectorGenero.append(crearOpcionGenero(genero));
+    }
+  });
+
+  selectorGenero.value = '';
+}
+
+// Dibuja una etiqueta por cada género elegido, con su botón "×".
+function pintarEtiquetasGeneros() {
+  if (!filtrosGeneros) return;
+
+  filtrosGeneros.replaceChildren();
+
+  generosSeleccionados.forEach((genero) => {
+    const etiqueta = document.createElement('span');
+    etiqueta.className = 'etiqueta_genero';
+
+    const texto = document.createElement('span');
+    texto.textContent = genero;
+
+    const quitar = document.createElement('button');
+    quitar.type = 'button';
+    quitar.className = 'quitar_genero';
+    quitar.textContent = '×';
+    quitar.setAttribute('aria-label', `Quitar género ${genero}`);
+    quitar.addEventListener('click', () => quitarGenero(genero));
+
+    etiqueta.append(texto, quitar);
+    filtrosGeneros.append(etiqueta);
+  });
+}
+
+function agregarGenero(genero) {
+  const clave = normalizarTexto(genero);
+
+  if (clave === '' || generosSeleccionados.some((g) => normalizarTexto(g) === clave)) {
+    return;
+  }
+
+  generosSeleccionados.push(genero);
+  pintarEtiquetasGeneros();
+  poblarSelectorGenero();
+  aplicarFiltro();
+}
+
+function quitarGenero(genero) {
+  const clave = normalizarTexto(genero);
+
+  generosSeleccionados = generosSeleccionados.filter((g) => normalizarTexto(g) !== clave);
+  pintarEtiquetasGeneros();
+  poblarSelectorGenero();
+  aplicarFiltro();
+}
 
 function aplicarFiltro() {
-  const texto = inputGenero.value.trim().toLowerCase();
+  const seleccionados = generosSeleccionados.map(normalizarTexto);
+
+  if (seleccionados.length === 0) {
+    if (botonLimpiarFiltros) botonLimpiarFiltros.hidden = true;
+    pintarCatalogo(todosLosLibros);
+    return;
+  }
 
   const filtrados = todosLosLibros.filter((libro) =>
-    (libro.genero || '').toLowerCase().includes(texto)
+    generosDeLibro(libro).some((genero) => seleccionados.includes(normalizarTexto(genero)))
   );
 
+  if (botonLimpiarFiltros) botonLimpiarFiltros.hidden = false;
   pintarCatalogo(filtrados);
+}
+
+function limpiarFiltros() {
+  generosSeleccionados = [];
+  pintarEtiquetasGeneros();
+  poblarSelectorGenero();
+
+  if (botonLimpiarFiltros) botonLimpiarFiltros.hidden = true;
+  pintarCatalogo(todosLosLibros);
+}
+
+// Prepara los géneros una sola vez, después de traer los libros.
+function iniciarFiltrosGeneros(libros) {
+  generosDisponibles = extraerGeneros(libros);
+  generosSeleccionados = [];
+  pintarEtiquetasGeneros();
+  poblarSelectorGenero();
 }
 
 // --- 7. Arranque: solo si esta página tiene el catálogo -------------------
 
 if (contenedor) {
-  inputGenero.addEventListener('input', aplicarFiltro);
+  if (botonLimpiarFiltros) {
+    botonLimpiarFiltros.addEventListener('click', limpiarFiltros);
+  }
 
-  formFiltros.addEventListener('submit', (e) => {
-    e.preventDefault();
-    aplicarFiltro();
-  });
+  if (selectorGenero) {
+    selectorGenero.addEventListener('change', () => {
+      const genero = selectorGenero.value;
+
+      if (genero !== '') {
+        agregarGenero(genero);
+      }
+    });
+  }
+
+  if (formFiltros) {
+    formFiltros.addEventListener('submit', (e) => {
+      e.preventDefault();
+      aplicarFiltro();
+    });
+  }
 
   cargarLibros();
 }
@@ -176,9 +327,52 @@ async function cargarDetalleLibro() {
     }
 
     pintarDetalle(libros[0]);
+    await cargarMiniCatalogo(id);
   } catch (error) {
     console.error('No se pudo cargar el libro:', error);
     mostrarErrorDetalle('No se pudo cargar el libro. Intentá de nuevo más tarde.');
+  }
+}
+
+// --- Mini catalogo: sugerencias aleatorias dentro del detalle -------------
+
+// Mezcla una lista sin modificar la original (Fisher-Yates).
+function mezclarAleatorio(lista) {
+  const copia = [...lista];
+
+  for (let i = copia.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+
+  return copia;
+}
+
+async function cargarMiniCatalogo(id) {
+  if (!contenedorMiniCatalogo) return;
+
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/libros?id=neq.${encodeURIComponent(id)}&select=*`,
+      { headers: SUPABASE_HEADERS }
+    );
+
+    if (!res.ok) {
+      throw new Error(`Error ${res.status}: ${res.statusText}`);
+    }
+
+    const otrosLibros = await res.json();
+
+    if (otrosLibros.length === 0) {
+      contenedorMiniCatalogo.hidden = true;
+      return;
+    }
+
+    const sugeridos = mezclarAleatorio(otrosLibros).slice(0, 3);
+    pintarCatalogo(sugeridos, contenedorMiniCatalogo);
+  } catch (error) {
+    console.error('No se pudieron cargar las sugerencias:', error);
+    contenedorMiniCatalogo.hidden = true;
   }
 }
 
