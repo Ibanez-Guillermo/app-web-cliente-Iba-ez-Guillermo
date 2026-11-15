@@ -324,46 +324,115 @@ main {
   color: var(--verde);
 }
 
-.filtros label {
-  display: block;
-  margin-bottom: var(--sp-2);
-  font-size: var(--fs-sm);
-}
-
-#filtro_genero {
+/* Caja que imita un campo de formulario: adentro van las etiquetas y el select */
+.campo_generos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
   width: 100%;
-  max-width: 360px;
-  padding: var(--sp-3);
+  max-width: 560px;
+  padding: var(--sp-2) var(--sp-3);
   background-color: var(--blanco);
   border: 1px solid var(--borde);
   border-radius: var(--radio);
-  font-size: var(--fs-sm);
   transition: border-color var(--transicion), box-shadow var(--transicion);
 }
 
-#filtro_genero:hover {
+.campo_generos:hover {
   border-color: var(--verde-claro);
 }
 
-#filtro_genero:focus {
-  outline: none;
+.campo_generos:focus-within {
   border-color: var(--verde);
   box-shadow: 0 0 0 3px var(--verde-claro);
 }
 
-#filtro_genero::placeholder {
+.lista_generos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.lista_generos:empty {
+  display: none;
+}
+
+.etiqueta_genero {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: var(--sp-1) var(--sp-2) var(--sp-1) var(--sp-3);
+  background-color: var(--verde-claro);
+  border: 1px solid var(--verde);
+  border-radius: 999px;
+  color: var(--verde);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.quitar_genero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: var(--verde);
+  font-size: var(--fs-base);
+  line-height: 1;
+  transition: background-color var(--transicion), color var(--transicion);
+}
+
+.quitar_genero:hover {
+  background-color: var(--verde);
+  color: var(--blanco);
+}
+
+.quitar_genero:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: 2px;
+}
+
+.selector_genero {
+  flex: 1 1 160px;
+  min-width: 150px;
+  padding: var(--sp-1) 0;
+  background-color: transparent;
+  border: none;
   color: var(--texto-suave);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.selector_genero:focus {
+  outline: none;
+}
+
+.filtros .btn_vaciar {
+  margin-top: var(--sp-4);
 }
 
 
 /* ==========================================================================
-   7. INDEX - CATALOGO
+   7. CATALOGO Y MINI CATALOGO
    ========================================================================== */
 
-#catalogo_productos {
+#catalogo_productos,
+#mini_catalogo {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
   gap: var(--sp-5);
+}
+
+#catalogo_productos {
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+}
+
+/* El mini catalogo tiene 3 columnas en escritorio */
+#mini_catalogo {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-4);
 }
 
 /* El titulo ocupa toda la fila del grid */
@@ -376,7 +445,8 @@ main {
   text-transform: uppercase;
 }
 
-#catalogo_productos article {
+#catalogo_productos article,
+#mini_catalogo article {
   display: flex;
   background-color: var(--blanco);
   border: 1px solid var(--borde);
@@ -385,13 +455,15 @@ main {
   transition: border-color var(--transicion), transform var(--transicion);
 }
 
-#catalogo_productos article:hover {
+#catalogo_productos article:hover,
+#mini_catalogo article:hover {
   transform: translateY(-3px);
   border-color: var(--verde);
 }
 
 /* El enlace ocupa toda la tarjeta: cualquier click abre el detalle */
-#catalogo_productos .tarjeta {
+#catalogo_productos .tarjeta,
+#mini_catalogo .tarjeta {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -400,48 +472,56 @@ main {
   border-radius: inherit;
 }
 
-#catalogo_productos .tarjeta:focus-visible {
+#catalogo_productos .tarjeta:focus-visible,
+#mini_catalogo .tarjeta:focus-visible {
   outline: 3px solid var(--verde);
   outline-offset: -3px;
 }
 
-#catalogo_productos .tarjeta:hover h3 {
+#catalogo_productos .tarjeta:hover h3,
+#mini_catalogo .tarjeta:hover h3 {
   color: var(--verde);
 }
 
-#catalogo_productos img {
+#catalogo_productos .tarjeta img,
+#mini_catalogo .tarjeta img {
   width: 100%;
   margin-bottom: var(--sp-3);
   background-color: var(--crema-oscuro);
   border-radius: var(--radio);
 }
 
-#catalogo_productos h3 {
+#catalogo_productos .tarjeta h3,
+#mini_catalogo .tarjeta h3 {
   font-size: var(--fs-base);
   line-height: 1.35;
   transition: color var(--transicion);
 }
 
 /* Formato: primer parrafo de la tarjeta */
-#catalogo_productos .tarjeta > p:first-of-type {
+#catalogo_productos .tarjeta > p:first-of-type,
+#mini_catalogo .tarjeta > p:first-of-type {
   color: var(--texto-suave);
   font-size: var(--fs-xs);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
-#catalogo_productos .autor {
+#catalogo_productos .autor,
+#mini_catalogo .autor {
   color: var(--texto-suave);
   font-size: var(--fs-sm);
 }
 
-#catalogo_productos .genero {
+#catalogo_productos .genero,
+#mini_catalogo .genero {
   color: var(--verde);
   font-size: var(--fs-xs);
 }
 
 /* Precio: ultimo parrafo, se pega al fondo de la tarjeta */
-#catalogo_productos .tarjeta > p:last-of-type {
+#catalogo_productos .tarjeta > p:last-of-type,
+#mini_catalogo .tarjeta > p:last-of-type {
   margin-top: auto;
   padding-top: var(--sp-2);
   font-size: var(--fs-lg);
@@ -474,6 +554,10 @@ main {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: var(--sp-4);
   }
+
+  #mini_catalogo {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 520px) {
@@ -489,10 +573,6 @@ main {
 
   .filtros {
     padding: var(--sp-4);
-  }
-
-  #filtro_genero {
-    max-width: 100%;
   }
 
   #catalogo_productos {
@@ -728,7 +808,8 @@ main form button[type="submit"]:hover {
 
 .descripcion,
 .detalles_libro,
-.calificaciones_comentarios {
+.calificaciones_comentarios,
+#mini_catalogo {
   grid-column: 1 / -1;
   padding: var(--sp-5);
   background-color: var(--blanco);
@@ -738,13 +819,103 @@ main form button[type="submit"]:hover {
 
 .descripcion h3,
 .detalles_libro h3,
-.calificaciones_comentarios > h3 {
+.calificaciones_comentarios > h3,
+#mini_catalogo > h3 {
   margin-bottom: var(--sp-4);
   padding-bottom: var(--sp-2);
   border-bottom: 2px solid var(--verde);
   font-size: var(--fs-lg);
   letter-spacing: 0.02em;
   text-transform: uppercase;
+}
+
+/* --- Mini catalogo: sugerencias dentro del detalle --- */
+
+/* Sin libros sugeridos (o si falla la consulta) la seccion se oculta */
+#mini_catalogo[hidden] {
+  display: none;
+}
+
+/* Contenedor compacto: menos relleno interno */
+#mini_catalogo {
+  padding: var(--sp-4);
+}
+
+/* El titulo y el enlace ocupan toda la fila del grid */
+#mini_catalogo > h3 {
+  order: 0;
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+/* Tarjeta horizontal y compacta: portada a la izquierda, textos a la derecha */
+#mini_catalogo .tarjeta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: repeat(4, auto);
+  align-content: center;
+  align-items: center;
+  column-gap: var(--sp-3);
+  row-gap: 2px;
+  padding: var(--sp-3);
+}
+
+#mini_catalogo .tarjeta img {
+  grid-column: 1;
+  grid-row: 1 / span 4;
+  align-self: center;
+  width: 65px;
+  height: auto;
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+#mini_catalogo .tarjeta h3,
+#mini_catalogo .tarjeta > p {
+  grid-column: 2;
+}
+
+/* Textos mas chicos y ajustados para que la tarjeta no crezca en alto */
+#mini_catalogo .tarjeta h3 {
+  font-size: var(--fs-sm);
+  line-height: 1.25;
+}
+
+#mini_catalogo .tarjeta .autor {
+  font-size: var(--fs-xs);
+}
+
+#mini_catalogo .tarjeta > p:last-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: var(--fs-base);
+}
+
+/* El genero no aporta en una tarjeta tan compacta */
+#mini_catalogo .genero {
+  display: none;
+}
+
+#mini_catalogo > article {
+  order: 1;
+}
+
+#mini_catalogo .ver_mas {
+  order: 2;
+  grid-column: 1 / -1;
+  justify-self: end;
+  color: var(--verde);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+#mini_catalogo .ver_mas::after {
+  content: " \2192";
+}
+
+#mini_catalogo .ver_mas:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .descripcion p {
@@ -1562,7 +1733,12 @@ main form button[type="submit"]:hover {
   .datos_perfil,
   .descripcion,
   .detalles_libro,
-  .calificaciones_comentarios {
+  .calificaciones_comentarios,
+  #mini_catalogo {
     padding: var(--sp-4);
+  }
+
+  #mini_catalogo {
+    gap: var(--sp-4);
   }
 }
